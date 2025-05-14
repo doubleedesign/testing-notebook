@@ -1,0 +1,13 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"module": "esnext",
+		"moduleResolution": "node",
+		"target": "esnext",
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"resolveJsonModule": true,
+		"lib": ["esnext", "dom"]
+	},
+	"include": ["./**/*.ts"]
+}
