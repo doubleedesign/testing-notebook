@@ -1,0 +1,27 @@
+{
+	"unit": {
+		"title": "Unit testing",
+		"description": "Testing individual functions or methods in isolation to ensure they work as expected.",
+		"link": "/concepts/testing-types.html#unit-tests"
+	},
+	"component": {
+		"title": "Component testing",
+		"description": "",
+		"link": "/concepts/testing-types.html#component-tests"
+	},
+	"integration": {
+		"title": "Integration testing",
+		"description": "",
+		"link": "/concepts/testing-types.html#integration-tests"
+	},
+	"e2e": {
+		"title": "End-to-end testing",
+		"description": "Testing a complete user action flow from start to finish.",
+		"link": "/concepts/testing-types.html#end-to-end-e2e-tests"
+	},
+	"vr": {
+		"title": "Visual Regression testing",
+		"description": "",
+		"link": "/concepts/testing-types.html#visual-regression-tests"
+	}
+}

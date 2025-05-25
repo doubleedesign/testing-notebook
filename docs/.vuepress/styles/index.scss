@@ -1,0 +1,87 @@
+@use 'sass:color';
+@import 'https://use.typekit.net/daf8wql.css';
+
+$primary: #845ec2;
+$secondary: #00beac;
+$tertiary: #00d2fc;
+$accent: #ba3caf;
+
+:root {
+	--font-family: solitaire-mvb-pro, sans-serif;
+
+	--color-primary: #{$primary};
+	--color-secondary: #{$secondary};
+	--color-tertiary: #{$tertiary};
+	--color-accent: #{$accent};
+
+	--vp-c-accent: #{$primary};
+	--vp-c-accent-bg: #{$primary};
+	--vp-c-accent-hover: #{color.scale($primary, $lightness: -15%)};
+
+	--section-color-unit: #{$tertiary};
+	--section-color-component: #e084e7;
+	--section-color-integration: #ffd265;
+	--section-color-e2e: #76E391;
+
+	--homepage-width: 1140px;
+	--content-width: 840px;
+
+	--search-input-width: 14rem;
+	--search-c-accent: #{$secondary};
+
+	--popper-theme-background-color: #292931;
+	--popper-theme-background-color-hover: #292931;
+	--popper-theme-text-color: white;
+	--popper-theme-border-width: 1px;
+	--popper-theme-border-style: solid;
+	--popper-theme-border-color: var(--code-c-highlight-bg);
+	--popper-theme-border-radius: 0.25rem;
+	--popper-theme-padding: 1rem;
+	--popper-theme-box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.25);
+
+	&[data-theme="dark"] {
+		--popper-theme-background-color: #ffffff;
+		--popper-theme-background-color-hover: #ffffff;
+		--popper-theme-text-color: #3C3C43;
+		--popper-theme-border-width: 1px;
+		--popper-theme-border-style: solid;
+		--popper-theme-border-color: #eeeeee;
+		--popper-theme-border-radius: 0.25rem;
+		--popper-theme-padding: 1rem;
+		--popper-theme-box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.25);
+	}
+}
+
+body {
+	font-weight: 300;
+}
+
+.vp-home {
+	min-height: calc(100vh - var(--navbar-height));
+
+	@media (min-width: 760px) {
+		display: flex;
+		gap: 1rem;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+	}
+
+	.vp-hero {
+		flex-grow: 1;
+		flex-basis: auto;
+	}
+
+	div[vp-content] {
+		width: max-content;
+		flex-basis: max-content;
+	}
+
+	.vp-footer {
+		width: 100%;
+		flex-basis: 100%;
+		padding: 1rem;
+		margin-top: auto;
+		font-size: 0.9rem;
+	}
+}

@@ -9,7 +9,15 @@ import { getDirname, path } from '@vuepress/utils';
 const __dirname = getDirname(import.meta.url);
 
 export default defineUserConfig({
-	bundler: viteBundler(),
+	bundler: viteBundler({
+		viteOptions: {
+			resolve: {
+				alias: {
+					'@theme/VPHomeHero.vue': path.resolve(__dirname, 'layouts/HomeHero.vue')
+				}
+			}
+		}
+	}),
 	lang: 'en-AU',
 	title: 'Leesa\'s Testing Notebook',
 	theme: defaultTheme({
