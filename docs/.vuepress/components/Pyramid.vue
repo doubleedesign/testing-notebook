@@ -118,7 +118,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 	figure {
-		margin: 0;
+		margin: 0 auto;
 		width: 700px;
 		height: 600px;
 		padding: 1rem;

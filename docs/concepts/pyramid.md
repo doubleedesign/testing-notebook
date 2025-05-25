@@ -6,7 +6,11 @@ sidebarDepth: 0
 
 # The Testing Pyramid
 
-The testing pyramid is a metaphor for the distribution of different types of tests in a software project, with the idea that there should be more low-level (granular, small piece) tests than high-level (whole feature in a real website) ones. This is for a couple of reasons:
+The testing pyramid is a metaphor for the distribution of different types of tests in a software or web project, visualising the core principles that:
+- there should be more low-level (granular, small piece) tests than high-level (whole feature in a real website) ones 
+- we should test our building blocks thoroughly, with our more holistic tests building upon the foundation of code that we know works in isolation.
+
+This is for a couple of reasons:
 - Small, isolated, low-level tests are generally simpler to write and maintain, and they run faster. They can easily be run frequently, which helps catch bugs early.
 - The higher up the pyramid you go, the more complex and time-consuming the tests become. They often require more setup and are slower to run, which can make them less practical for frequent use.
 

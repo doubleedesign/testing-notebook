@@ -106,7 +106,7 @@ export default defineComponent({
 	}
 
 	&--page-level-vr {
-		left: 20%;
+		left: 16%;
 		bottom: 2rem;
 	}
 

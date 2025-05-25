@@ -132,12 +132,12 @@ export default defineComponent({
 
 		&--e2e {
 			background: var(--section-color-e2e);
-			height: 20cqh;
+			height: 30cqh;
 			clip-path: polygon(
 					50% 0,
 					50% 0,
-					57.5% 100%,
-					42.5% 100%
+					38% 100%,
+					62% 100%
 			);
 
 			span {
@@ -151,10 +151,10 @@ export default defineComponent({
 
 		&--integration {
 			background: var(--section-color-integration);
-			height: 25cqh;
+			height: 15cqh;
 			clip-path: polygon(
-					42.5% 0,
-					57.5% 0,
+					38% 0,
+					62% 0,
 					67.5% 100%,
 					32.5% 100%
 			);

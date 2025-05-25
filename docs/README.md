@@ -4,11 +4,11 @@ title: Home
 tagline: <strong>A guide to testing</strong> for people <span>who develop websites for people</span>
 actions:
   - text: Learn concepts
-    link: /intro.html
+    link: /concepts/pyramid.html
     type: secondary
 
   - text: See examples
-    link: /examples.html
+    link: /examples/overview.html
     type: primary
 
 footer: A Double-E Design creation | Site powered by VuePress
