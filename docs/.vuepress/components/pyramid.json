@@ -1,27 +1,27 @@
 {
 	"unit": {
 		"title": "Unit testing",
-		"description": "Testing individual functions or methods in isolation to ensure they work as expected.",
+		"description": "Testing individual functions or methods in isolation",
 		"link": "/concepts/testing-types.html#unit-tests"
 	},
 	"component": {
 		"title": "Component testing",
-		"description": "",
+		"description": "In-browser testing of individual UI components",
 		"link": "/concepts/testing-types.html#component-tests"
 	},
 	"integration": {
 		"title": "Integration testing",
-		"description": "",
+		"description": "Testing how multiple components work together to form layouts, or how a component interacts with a back-end function or API",
 		"link": "/concepts/testing-types.html#integration-tests"
 	},
 	"e2e": {
 		"title": "End-to-end testing",
-		"description": "Testing a complete user action flow from start to finish.",
+		"description": "In-browser testing of a complete user action flow from start to finish, usually in a dev or staging site",
 		"link": "/concepts/testing-types.html#end-to-end-e2e-tests"
 	},
 	"vr": {
 		"title": "Visual Regression testing",
-		"description": "",
-		"link": "/concepts/testing-types.html#visual-regression-tests"
+		"description": "Comparing the visual appearance of a component, template part, or page to a baseline to confirm intended changes and catch unintended ones",
+		"link": "/concepts/testing-types.html#visual-regression-vr-tests"
 	}
 }

@@ -5,6 +5,7 @@ import { registerComponentsPlugin } from '@vuepress/plugin-register-components';
 import { markdownExtPlugin } from '@vuepress/plugin-markdown-ext';
 import { prismjsPlugin } from '@vuepress/plugin-prismjs';
 import { searchPlugin } from '@vuepress/plugin-search';
+import { usePagesPlugin } from 'vuepress-plugin-use-pages';
 import { getDirname, path } from '@vuepress/utils';
 import matter from 'gray-matter';
 
@@ -40,6 +41,10 @@ export default defineUserConfig({
 				link: '/examples/overview.html',
 			},
 			{
+				text: 'Case Studies',
+				link: '/case-studies/overview.html',
+			},
+			{
 				text: 'About',
 				link: '/about.html',
 			}
@@ -48,16 +53,20 @@ export default defineUserConfig({
 		sidebar: [
 			{
 				text: 'Concepts',
-				// Get the contents of the concepts directory and order by their "order" in the frontmatter
+				collapsible: true,
 				children: getPagesFromSubfolder(path.resolve(__dirname, '../concepts')),
 			},
 			{
 				text: 'Examples',
 				link: '/examples/overview.html',
+				collapsible: true,
+				children: getPagesFromSubfolder(path.resolve(__dirname, '../examples')),
 			},
 			{
-				text: 'Glossary',
-				link: '/glossary.html',
+				text: 'Case Studies',
+				link: '/examples/overview.html',
+				collapsible: true,
+				children: getPagesFromSubfolder(path.resolve(__dirname, '../case-studies')),
 			},
 			{
 				text: 'Further Reading',
@@ -69,6 +78,7 @@ export default defineUserConfig({
 		registerComponentsPlugin({
 			components: {
 				Pyramid: path.resolve(__dirname, './components/Pyramid.vue'),
+				SectionTOC: path.resolve(__dirname, './components/SectionTOC.vue'),
 			}
 		}),
 		markdownExtPlugin({
@@ -79,32 +89,35 @@ export default defineUserConfig({
 			theme: 'coldark-dark',
 			preloadLanguages: ['php', 'html', 'css', 'scss', 'js', 'json', 'bash', 'powershell'],
 		}),
-		searchPlugin() 
+		searchPlugin(),
+		usePagesPlugin({
+			startsWith: '/examples/',
+			file: 'examples-pages.js'
+		}),
+		usePagesPlugin({
+			startsWith: '/case-studies/',
+			file: 'case-studies-pages.js'
+		}),
 	]
 });
 
 function getPagesFromSubfolder(folderPath: string) {
 	const dirContents = fs.readdirSync(folderPath);
-
 	const files = dirContents
 		.filter(file => file.endsWith('.md'))
 		.map(file => path.join(folderPath, file));
 
-	// Sort by the order in the frontmatter
 	files.sort((a, b) => {
 		const contentA = fs.readFileSync(a, 'utf-8');
 		const contentB = fs.readFileSync(b, 'utf-8');
-
 		const frontmatterA = matter(contentA);
 		const frontmatterB = matter(contentB);
-
 		const orderA = frontmatterA.data.order || 0;
 		const orderB = frontmatterB.data.order || 0;
 
 		return orderA - orderB;
 	});
 
-	// Return array of title and path objects
 	return files.map(file => {
 		const content = fs.readFileSync(file, 'utf-8');
 		const frontmatter = matter(content);

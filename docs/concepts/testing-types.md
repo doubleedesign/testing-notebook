@@ -31,6 +31,12 @@ When we get into [mocking and stubbing](./mocking.md), you might wonder where th
 Unit tests are focused on testing the logic of a specific function or method, and should mock the results of other functions that impact the logic of the function being tested (and no others), and we should never call the real function from the CMS or plugin because that would mean the test is no longer an isolated unit test. Conversely, in integration tests we might call the real functions from the CMS or other plugins to ensure that our understanding of how they work is correct.
 :::
 
+:::info Unit vs component tests for UI
+Unit tests are focused on testing the logic of a specific function or method, which _can_ include testing the logic of a function that generates a UI component. The distinction drawn here is that component tests are run in a real browser environment, where you can see and interact with the rendered component, while unit tests are not. You can see a more detailed comparison of unit and component tests in the [Component tests](#component-tests) section below.
+:::
+
+Unit tests are used extensively for testing non-UI code, such as back-end logic and data processing. For example, if you are developing a WordPress plugin for anything other than pure UI components, you will likely write unit tests for the logic of your plugin's functions, such as data processing, calculations, transformations, or API interactions.
+
 :::details Use cases for unit tests
 You might want to use unit tests when you are:
 - Developing a plugin for a CMS, and you want to test the logic of a specific function or method
@@ -56,11 +62,10 @@ The language (and framework, if applicable) of the code you are testing determin
 
 **For JavaScript:**
 - [Jest](https://jestjs.io/)
-- [Mocha](https://mochajs.org/)
 - [Vitest](https://vitest.dev/)
+- [Mocha](https://mochajs.org/)
 
-You will often use these tools in conjunction with libraries for [mocking/stubbing](./mocking.md), assertions, and 
-other testing utilities. Examples include:
+You will often use these tools in conjunction with libraries for [mocking/stubbing](./mocking.md), assertions, and other testing utilities. Examples include:
 
 **For PHP:**
 - [Mockery](http://docs.mockery.io/en/stable/)
@@ -78,20 +83,32 @@ other testing utilities. Examples include:
 ## Component tests
 
 :::note Definition
-Throughout this site, the term **component** is shorthand for a **user interface component**, i.e., a piece of the UI that is rendered on the front-end of your website. Depending on the ecosystem you're in, these might also be referred to as _template parts_, _partials_, _blocks_, _content modules_, or similar.
+_Component_ is a broad term in software. Throughout this site, the term **component** is used to refer to a **user interface component**, i.e., a piece of the UI that is rendered on the front-end of your website. Depending on the ecosystem you're in, these might also be referred to as _template parts_, _partials_, _blocks_, _content modules_, or similar.
 :::
 
 A **component test** is a type of test that focuses on the behaviour and rendering of a specific user interface component in a web application. It is designed to verify that the component behaves as expected when rendered in a browser and interacted with by a user.
 
-Component testing sits in between unit and integration tests conceptually, and share use cases and tooling with both.
-A component test looks at a single component in isolation (like a unit test), but also tests interaction and is run 
-in a browser (like an integration test). Like unit tests, component tests use placeholder/mocked data, rather than real data from a live API or database.
+Component testing sits in between unit and integration tests conceptually, and can share use cases and tooling with both. A component test looks at a single component in isolation (like a unit test), but also tests interaction and is run in a browser (like an integration test). Like unit tests, component tests use placeholder/mocked data, rather than real data from a live API or database.
 
-:::info Unit vs Component tests
+:::info Component vs unit tests
 Both unit and component tests look at a single component in isolation and typically use placeholder or mocked data. Some unit testing tools can also test interaction, so you may be wondering where the line is drawn between unit and component tests. 
 
 In this guide, the term **unit test** is reserved specifically for tests _not_ run in a real browser environment that you can see and interact with (not counting emulators like JSDOM). **Component test** is used to describe an isolated component test that is run in a real browser environment, where you can see and interact with the rendered component.
 :::
+
+Based on my own experience with [Pest](https://pestphp.com/), [Jest](https://jestjs.io/) + [@testing-library](https://testing-library.com), and admittedly less experience with [Playwright](https://playwright.dev/), [Cypress](https://www.cypress.io/) and [Storybook Interaction Testing](https://storybook.js.org/docs/writing-tests/interaction-testing), the pros and cons of component tests compared to unit tests are:
+
+| Unit tests                                                                    | Component tests                                                                             |
+|-------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| :white_check_mark: Very fast to run                                           | :no_entry: Slow to run                                                                      |
+| :white_check_mark: Minimal setup effort                                       | :no_entry: High setup effort                                                                |
+| :white_check_mark: [Coverage reporting](./coverage.md) for any language       | :no_entry: [Coverage reporting](./coverage.md) limited to client-side code                  |
+| :no_entry: No interaction testing for PHP-rendered components                 | :white_check_mark: Interaction testing regardless of source language                        |
+| :no_entry: Hard or not possible to debug UI issues                            | :white_check_mark: Debug real UI in a real browser                                          |
+| :no_entry: No visual testing                                                  | :white_check_mark: Visual regression testing possible                                       |
+| :no_entry: Different tooling for different types of source code               | :white_check_mark: Can use the same tooling regardless of source code                       |
+| :no_entry: Not intended for testing integration of components with each other | :white_check_mark: Can use the same environment and tools for component integration testing |
+
 
 :::details Use cases for component tests
 You might want to use component tests when you are:
@@ -126,7 +143,7 @@ You might want to use visual regression tests when you are:
 :::details Tooling for visual regression tests
 There are several tools available for writing and running visual regression tests, and these are generally independent of the language or framework your code is written in because you are using them to visit a webpage in the browser, not interact with the code. Examples include:
 - [Playwright](https://playwright.dev/)
-- [Storybook with Chromatic](https://www.chromatic.com/storybook)
+- [Storybook with Chromatic](https://www.chromatic.com/storybook) (note: third-party service)
 :::
 
 ## Integration tests

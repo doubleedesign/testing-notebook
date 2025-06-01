@@ -51,7 +51,7 @@ export default defineComponent({
 			<slot></slot>
 		</div>
 		<footer class="popover__footer">
-			<a :href="link">Read more</a>
+			<router-link :to="link">Read more</router-link>
 		</footer>
 	</section>
 </template>
@@ -77,6 +77,8 @@ export default defineComponent({
 
 		:deep p {
 			margin-block-start: 0;
+			font-weight: 300;
+			font-size: 0.875rem;
 
 			&:last-of-type {
 				margin-block-end: 0;
@@ -86,15 +88,24 @@ export default defineComponent({
 
 	&__footer {
 		margin-top: 0.25rem;
-		border-top: 1px solid color-mix(in srgb, var(--vp-c-text-mute) 30%, transparent);
+		border-top: 1px solid var(--vp-c-text-mute);
 		padding-top: 0.25rem;
 		display: flex;
 		justify-content: flex-end;
+
+		[data-theme="dark"] & {
+			border-top-color: color-mix(in srgb, var(--vp-c-text-mute) 95%, black);
+		}
 
 		a {
 			display: inline-flex;
 			gap: 0.5rem;
 			align-items: center;
+			color: color-mix(in srgb, var(--vp-c-accent) 70%, white);
+
+			[data-theme="dark"] & {
+				color: var(--vp-c-accent);
+			}
 
 			&:after {
 				content: "";

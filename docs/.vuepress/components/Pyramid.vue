@@ -82,7 +82,7 @@ export default defineComponent({
 								v-on="commonEvents"
 								v-bind="commonProps"
 							>
-								{{ formatDescription(item.description) }}
+								<div v-html="formatDescription(item.description)"></div>
 							</PyramidSlice>
 							<template v-if="key === 'component'">
 								<PyramidScribble

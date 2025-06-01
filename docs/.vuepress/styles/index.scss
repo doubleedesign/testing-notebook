@@ -16,7 +16,7 @@ $accent: #ba3caf;
 
 	--vp-c-accent: #{$primary};
 	--vp-c-accent-bg: #{$primary};
-	--vp-c-accent-hover: #{color.scale($primary, $lightness: -15%)};
+	--vp-c-accent-hover: #{color.scale($primary, $lightness: -30%)};
 
 	--section-color-unit: #{$tertiary};
 	--section-color-component: #e084e7;
@@ -39,6 +39,8 @@ $accent: #ba3caf;
 	--popper-theme-padding: 1rem;
 	--popper-theme-box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.25);
 
+	--vp-c-bg-alt: transparent;
+
 	&[data-theme="dark"] {
 		--popper-theme-background-color: #ffffff;
 		--popper-theme-background-color-hover: #ffffff;
@@ -54,6 +56,10 @@ $accent: #ba3caf;
 
 body {
 	font-weight: 300;
+}
+
+a {
+	transition: all 0.2s ease-in-out;
 }
 
 .vp-home {
@@ -83,5 +89,58 @@ body {
 		padding: 1rem;
 		margin-top: auto;
 		font-size: 0.9rem;
+	}
+}
+
+div[vp-content] {
+
+	a {
+		text-decoration-color: color-mix(in srgb, var(--vp-c-accent) 50%, transparent) !important;
+
+		&:hover, &:focus, &:active {
+			color: var(--color-secondary);
+			text-decoration-color: currentColor !important;
+		}
+	}
+
+	table {
+		width: 100%;
+		border-radius: 0.5rem;
+		display: block; // required for the outline to work properly
+		outline: 1px solid var(--vp-c-border); // puts a border around the table not cut off by the border radius
+		outline-offset: -1px; // covers the the borders of the cells rather than using complex CSS for those
+
+		thead, tbody {
+			display: contents;
+		}
+
+		thead th {
+			border-top: 0;
+		}
+
+		tr {
+			display: flex;
+			width: 100%;
+		}
+
+		th, td {
+			flex: 1;
+			border-color: var(--vp-c-border);
+			border-bottom: 0;
+			box-sizing: border-box;
+			border-right: 0;
+		}
+
+		th {
+			text-align: start;
+			background-color: var(--detail-c-bg);
+		}
+
+		td {
+			// Alignment of second and subsequent lines of text when the text starts with an emoji
+			// May require adjustment if I add tables that don't have emojis but do have multiline text
+			text-indent: -2.6ch;
+			padding-left: 4ch;
+		}
 	}
 }

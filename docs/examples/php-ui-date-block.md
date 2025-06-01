@@ -1,9 +1,13 @@
 ---
-title: "PHP UI Component: Date Block"
+title: PHP UI Component
 order: 1
+source_lang: [PHP]
+test_type: [Unit]
+test_tools: [Pest]
+sidebarDepth: 0
 ---
 
-# Example: PHP UI Component - Date Block
+# Example: Unit testing a PHP UI component 
 
 ## Context
 
