@@ -1,6 +1,6 @@
 ---
 title: Unit vs Component Testing (JS)
-order: 3
+order: 5
 source_lang: [JavaScript (Vue)]
 test_type: [Unit,Component]
 test_tools: [Jest,Storybook]

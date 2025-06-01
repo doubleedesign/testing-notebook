@@ -1,6 +1,6 @@
 ---
 title: Unit vs Component Testing (PHP)
-order: 2
+order: 4
 source_lang: [PHP]
 test_type: [Unit,Component]
 test_tools: [Pest,Storybook]
