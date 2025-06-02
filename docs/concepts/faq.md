@@ -34,3 +34,14 @@ Examples of use cases for unit tests with mocked functions include:
 :::details I'm not a developer - I design sites with a page builder and use existing plugins. How can I use automated testing?
 [End-to-end tests](./testing-types.md#end-to-end-e2e-tests) are the most accessible and practical type of tests for non-developers and those testing implementations of CMS themes and plugins. You will need to write some code for the tests themselves, but as long as you know some basics like [selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors) and some basic JavaScript syntax, you can get started with E2E tests using tools such as [Playwright](https://playwright.dev/) or [Cypress](https://www.cypress.io/). An IDE such as [JetBrains Aqua](https://www.jetbrains.com/aqua/) can help you write and run tests without needing to set up a complex development environment, and make it easier to navigate the results of your tests.
 :::
+
+:::details How should I name my test files where should I put them?
+There are multiple common conventions for where to put test files and what to name them, with some being more common than others for certain tools or languages, or in certain projects or communities. These include:
+- In a `tests` or `spec` directory at the root of the project (or `__tests__`)
+- In separate `tests` or `spec` directories in different parts of the project 
+- Co-located with the files they test - one test file per source file
+
+Some testing tools will look for tests in specific locations and/or with specific naming conventions out of the box, so if not or you want to use a different convention, you may need to configure the tool to find your tests. Testing frameworks like Pest, PhpUnit, Jest, Playwright, etc. all have a configuration file and/or command-line options that allow you to specify how to locate your tests.
+
+The most important thing is to be consistent within your project and/or your team, so that you and others can easily find the tests when needed.
+:::

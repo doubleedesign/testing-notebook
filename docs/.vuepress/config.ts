@@ -57,6 +57,10 @@ export default defineUserConfig({
 				children: getPagesFromSubfolder(path.resolve(__dirname, '../concepts')),
 			},
 			{
+				text: 'Getting Started',
+				link: '/setup.html',
+			},
+			{
 				text: 'Examples',
 				link: '/examples/overview.html',
 				collapsible: true,
@@ -67,6 +71,10 @@ export default defineUserConfig({
 				link: '/examples/overview.html',
 				collapsible: true,
 				children: getPagesFromSubfolder(path.resolve(__dirname, '../case-studies')),
+			},
+			{
+				text: 'Troubleshooting',
+				link: '/troubleshooting.html',
 			},
 			{
 				text: 'Further Reading',
