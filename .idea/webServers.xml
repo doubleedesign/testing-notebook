@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="b1637ca9-524c-475f-b3a5-502bd758ec05" name="Synergy" url="https://timefortesting.net/">
+        <fileTransfer rootFolder="/home/timefort" accessType="SFTP" host="SYN07BE.SYD6.hostyourservices.net" port="2683" sshConfigId="680e653e-095e-40e2-bb72-d3c224ef17ed" sshConfig="timefort@SYN07BE.SYD6.hostyourservices.net:2683 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

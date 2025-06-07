@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="SYN07BE.SYD6.hostyourservices.net" id="680e653e-095e-40e2-bb72-d3c224ef17ed" port="2683" nameFormat="DESCRIPTIVE" username="timefort" useOpenSSHConfig="false" />
+    </configs>
+  </component>
+</project>
