@@ -27,6 +27,7 @@ export default defineUserConfig({
 	theme: defaultTheme({
 		repo: 'doubleedesign/testing-notebook',
 		repoLabel: 'GitHub',
+		editLink: false,
 		navbar: [
 			{
 				text: 'Home',
@@ -59,6 +60,12 @@ export default defineUserConfig({
 			{
 				text: 'Getting Started',
 				link: '/setup.html',
+			},
+			{
+				text: 'Tooling Deep Dives',
+				link: '/tooling/overview.html',
+				collapsible: true,
+				children: getPagesFromSubfolder(path.resolve(__dirname, '../tooling')),
 			},
 			{
 				text: 'Examples',
@@ -106,6 +113,10 @@ export default defineUserConfig({
 			startsWith: '/case-studies/',
 			file: 'case-studies-pages.js'
 		}),
+		usePagesPlugin({
+			startsWith: '/tooling/',
+			file: 'tooling-pages.js'
+		}),
 	]
 });
 
@@ -129,11 +140,13 @@ function getPagesFromSubfolder(folderPath: string) {
 	return files.map(file => {
 		const content = fs.readFileSync(file, 'utf-8');
 		const frontmatter = matter(content);
+		if(frontmatter.data.status === 'planned') return null;
+
 		const title = frontmatter.data.title || path.basename(file, '.md').replace(/-/g, ' ').replace(/_/g, ' ');
 
 		return {
 			text: title,
 			link: `/${path.relative(path.resolve(__dirname, '..'), file).replace(/\\/g, '/')}`
 		};
-	});
+	}).filter(Boolean);
 }

@@ -59,6 +59,16 @@ $accent: #ba3caf;
 	}
 }
 
+@mixin link-underline-transition {
+	text-decoration: underline;
+	text-decoration-color: transparent;
+	transition: all 0.2s ease-in-out;
+
+	&:hover, &:focus, &:active {
+		text-decoration-color: currentColor;
+	}
+}
+
 body {
 	font-weight: 300;
 }
@@ -86,7 +96,7 @@ h4 {
 }
 
 a {
-	transition: all 0.2s ease-in-out;
+	@include link-underline-transition;
 }
 
 .vp-site-name {
@@ -133,6 +143,10 @@ table {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
+		}
+
+		&.vp-sidebar-heading {
+			transition-property: all;
 		}
 	}
 
@@ -321,12 +335,50 @@ div[vp-content] {
 		td {
 			// Alignment of second and subsequent lines of text when the text starts with an emoji
 			// May require adjustment if I add tables that don't have emojis but do have multiline text
-			text-indent: -2.6ch;
-			padding-left: 4ch;
+			text-indent: 1.65em hanging;
 		}
 	}
 }
 
 .footnotes-list {
 	font-size: 0.875rem;
+}
+
+.vp-page-meta, .vp-page-nav {
+	font-family: var(--font-family-highlight);
+}
+
+.vp-page-meta {
+	padding-block-start: 2rem;
+	padding-block-end: 0;
+}
+
+.vp-page-nav {
+	border-top: 0;
+	display: flex;
+	gap: 0.5rem;
+
+	.auto-link {
+		margin: 0;
+		max-width: 50%;
+		padding: 0.5rem;
+
+		.hint {
+			line-height: unset;
+		}
+
+		&.prev {
+			.link {
+				padding-inline-start: 1rem;
+			}
+		}
+
+		&.next {
+			margin-left: auto;
+
+			.link {
+				padding-inline-end: 1rem;
+			}
+		}
+	}
 }
