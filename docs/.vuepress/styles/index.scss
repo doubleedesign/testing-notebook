@@ -30,6 +30,7 @@ $accent: #ba3caf;
 
 	--homepage-width: 1240px;
 	--content-width: 840px;
+	--navbar-height: 4rem;
 
 	--search-input-width: 14rem;
 	--search-c-accent: #{$secondary};
@@ -102,6 +103,23 @@ a {
 .vp-site-name {
 	font-family: var(--font-family-accent);
 	font-size: 1.5rem;
+	display: inline-flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	line-height: 1;
+	transform: translateY(-0.4rem);
+
+	&:after {
+		// TODO: Get this into the HTML
+		content: 'By Double-E Design';
+		font-size: 0.8rem;
+		font-family: var(--font-family-highlight);
+		font-weight: 300;
+		display: block;
+		text-align: right;
+		transform: translateX(1rem);
+		max-width: 10rem;
+	}
 }
 
 .vp-navbar-items {

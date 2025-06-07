@@ -34,16 +34,16 @@ export default defineUserConfig({
 				link: '/',
 			},
 			{
-				text: 'Concepts',
+				text: 'Why?',
+				link: '/benefits.md',
+			},
+			{
+				text: 'What?',
 				link: '/concepts/pyramid.html',
 			},
 			{
-				text: 'Examples',
+				text: 'How?',
 				link: '/examples/overview.html',
-			},
-			{
-				text: 'Case Studies',
-				link: '/case-studies/overview.html',
 			},
 			{
 				text: 'About',
@@ -52,6 +52,10 @@ export default defineUserConfig({
 		],
 		sidebarDepth: 1,
 		sidebar: [
+			{
+				text: 'Why automated testing?',
+				link: '/benefits.md'
+			},
 			{
 				text: 'Concepts',
 				collapsible: true,

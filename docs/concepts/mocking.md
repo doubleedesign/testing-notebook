@@ -1,5 +1,5 @@
 ---
-title: Mocking
+title: Mocking and stubbing
 order: 6
 ---
 
@@ -8,6 +8,10 @@ order: 6
 Mocking and stubbing are techniques used in unit and component testing to create a simulated version of an object or function, and/or have a function return a specific result. This allows you to isolate the code being tested from its dependencies, enabling you to focus on the behavior of the code itself.
 
 Mocking and stubbing is part of the **arrange** step in the [Arrange-Act-Assert (AAA) test pattern](./patterns.md), where you set up the conditions for your test. It is a way of setting up your scenario, for example "If this other function returns this value..."
+
+[[toc]]
+
+## Terminology
 
 :::note Definitions
 I tend to use the terms "mock" and "mocking" as an umbrella term for all types of test doubles, and you may see "mocking and stubbing" used as a general term in other testing guides as well as other terms like "monkey patching" and "spies" There are some subtle differences in the technical definitions of these terms:
@@ -29,13 +33,11 @@ In some cases, you will combine unit testing with integration or end-to-end test
 Below is some general information about how to set up and use mocks/stubs/etc in various situations. More specific 
 examples and use cases can be found in the [Examples](../examples/overview.md) and [Case Studies](../case-studies/overview.md) sections.
 
-[[toc]]
-
 ## In PHP unit tests (General)
 
 ### Patchwork
 
-[Patchwork](https://antecedent.github.io/patchwork/) is a simple, easy-to-use library for replacing **global functions** and static methods with mock versions in PHP. It allows you to override the behavior of functions during tests. It doesn't require any global setup or teardown, making it easy to use for individual test cases and very practical for mocking procedural code.
+[Patchwork](https://antecedent.github.io/patchwork/) is a simple, easy-to-use library for replacing **global functions** and static methods with fake test versions in PHP. It allows you to override the behavior of functions during tests. It doesn't require any global setup or teardown, making it easy to use for individual test cases and very practical for mocking procedural code.
 
 :::note
 Example to come
@@ -55,11 +57,7 @@ Patchwork and Mockery can both be used in unit tests for WordPress plugin and th
 
 [BrainMonkey](https://giuseppe-mazzapica.gitbook.io/brain-monkey) and [WP_Mock](https://wp-mock.gitbook.io/documentation) are libraries that use Patchwork and Mockery under the hood, but provide additional features for WordPress-specific testing such as support for actions and filters and built-in mocks for common WordPress functions so you don't have to worry about tests failing because you didn't mock something like `wp_json_encode`.
 
-I came across BrainMonkey first and really like its syntax for mocking/patching functions, but I'm also trying WP_Mock in some of my current projects. I'll update this page if I find any differences that make one more suitable than the other for certain use cases.
-
-:::note
-Examples to come
-:::
+I came across BrainMonkey first and really like its syntax for mocking/patching functions, but I'm also trying WP_Mock in some of my current projects. You can find more information in the dedicated [BrainMonkey vs WP_Mock](../tooling/brainmonkey-vs-wpmock.md) article.
 
 ## In JavaScript unit tests
 
@@ -76,7 +74,7 @@ Example to come
 
 ### React Magnetic DI
 
-If you're testing React components, you can use [React Magnetic DI](https://github.com/albertogasparin/react-magnetic-di) to replace dependencies with mock versions. This library allows you to create a dependency injection container that can be used to provide mock implementations of your components' dependencies during tests. A bonus of this approach is that it can also be used in component tests, making it easy to share code and reduce context switching when working with both unit and component tests.
+If you're testing React components, you can use [React Magnetic DI](https://github.com/albertogasparin/react-magnetic-di) to replace dependencies with test versions. This library allows you to create a dependency injection container that can be used to provide mock implementations of your components' dependencies during tests. A bonus of this approach is that it can also be used in component tests, making it easy to share code and reduce context switching when working with both unit and component tests.
 
 :::note
 Example to come

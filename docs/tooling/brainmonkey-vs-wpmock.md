@@ -78,35 +78,53 @@ _So far_, I have not found much difference between these two libraries in practi
 
 Shown below are some examples of how to do some simple, common mocking/stubbing tasks with each library.
 
-### Setting the role of the current user
+### Setting admin or front-end context
+
+```php
+// WordPress function usage
+$is_frontend = !is_admin();
+```
 
 ```php
 // WP_Mock
-use WP_Mock;
+WP_Mock::userFunction('is_admin')->andReturn(false);
+```
 
+```php
+// BrainMonkey
+when('is_admin')->justReturn(false);
+```
+
+### Setting the role of the current user
+
+```php
+// WordPress function usage
+$is_customer = current_user_can('customer');
+```
+
+```php
+// WP_Mock
 WP_Mock::userFunction('current_user_can', [
-    'args' => ['role_to_test'],
+    'args' => ['customer'],
     'return' => true
 ]);
 ```
 
 ```php
 // BrainMonkey
-use function Brain\Monkey\Functions\when;
-
-when('current_user_can')->alias(function($capability) {
-    return $capability === 'role_to_test';
+when('current_user_can')->alias(function($role_or_capability) {
+    return $role_or_capability === 'customer';
 });
 ```
 
 :::details Alternative syntax for the callback in the BrainMonkey example
 ```php
 // Shortest version:
-when('current_user_can')->alias(fn($capability) => $capability === 'role_to_test');
+when('current_user_can')->alias(fn($role_or_capability) => $role_or_capability === 'role_to_test');
 
 // Expanded version:
-when('current_user_can')->alias(function($capability) {
-    if ($capability === 'role_to_test') {
+when('current_user_can')->alias(function($role_or_capability) {
+    if ($role_or_capability === 'role_to_test') {
         return true;
     }
     return false;

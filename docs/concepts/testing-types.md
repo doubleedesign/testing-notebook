@@ -100,7 +100,7 @@ Based on my own experience with [Pest](https://pestphp.com/), [Jest](https://jes
 
 | Unit tests                                                                    | Component tests                                                                             |
 |-------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| :white_check_mark: Very fast to run                                           | :no_entry: Slow to run                                                                      |
+| :white_check_mark: Very fast to run                                           | :no_entry: Slower to run                                                                    |
 | :white_check_mark: Minimal setup effort                                       | :no_entry: High setup effort                                                                |
 | :white_check_mark: [Coverage reporting](./coverage.md) for any language       | :no_entry: [Coverage reporting](./coverage.md) limited to client-side code                  |
 | :no_entry: No interaction testing for PHP-rendered components                 | :white_check_mark: Interaction testing regardless of source language                        |
@@ -164,8 +164,7 @@ Integration tests typically take up more of the testing pyramid than E2E than as
 
 :::details Use cases for integration tests
 You might want to use integration tests when you are:
-- Developing a plugin or theme for a CMS, and you need to test how your code responds to the result of the functions 
-  it calls from the CMS or other plugins
+- Developing a plugin or theme for a CMS, and you need to test how your code responds to the result of the functions it calls from the CMS or other plugins
 - Developing or modifying custom front-end components/template parts that you need to test in combination with other components to form a layout
 :::
 

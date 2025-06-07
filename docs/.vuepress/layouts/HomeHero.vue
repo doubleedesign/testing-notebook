@@ -135,10 +135,11 @@ const HomeHeroImage: FunctionalComponent = () => {
 	font-size: 1.6rem;
 	line-height: 1.3;
 	text-align: center;
+	font-weight: 400;
 
 	span {
 		font-family: var(--font-family-accent);
-		font-size: 1.25em;
+		font-size: 1.125em;
 	}
 
 	@media (min-width: 1240px) {
