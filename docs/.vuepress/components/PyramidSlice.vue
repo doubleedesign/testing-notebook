@@ -68,13 +68,13 @@ export default defineComponent({
 </script>
 
 <template>
-	<Popper :class="['slice', 'slice--with-popper', { 'slice--dimmed': this.dimmed }]"
-			:offsetDistance="this.popperOffset"
-			:show="this.isOpen"
+	<Popper :class="['slice', 'slice--with-popper', { 'slice--dimmed': dimmed }]"
+			:offsetDistance="this?.popperOffset ?? 12"
+			:show="isOpen"
 			arrow
 			disableClickAway
 	>
-		<button @click="this.onToggle" :class="`slice__button slice__button--${id}`">
+		<button @click="onToggle" :class="`slice__button slice__button--${id}`">
 			<span>{{ label }}</span>
 		</button>
 		<template #content>
@@ -82,7 +82,7 @@ export default defineComponent({
 				:title="title"
 				:link="link"
 				class="slice__content"
-				@close="this.onClose"
+				@close="onClose"
 			>
 				<slot></slot>
 			</PopoverContent>

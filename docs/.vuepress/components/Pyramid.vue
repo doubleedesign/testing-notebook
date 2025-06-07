@@ -134,7 +134,7 @@ export default defineComponent({
 			margin-block-end: 4rem;
 		}
 
-		@container (min-width: 700px) {
+		@container (min-width: 700px) and (min-height: 900px) {
 			height: 700px;
 		}
 

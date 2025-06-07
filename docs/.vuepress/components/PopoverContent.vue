@@ -45,7 +45,7 @@ export default defineComponent({
 			<h2 id="popover-title" class="popover__header__title">
 				{{ title }}
 			</h2>
-			<CloseButton @click="this.onClose" />
+			<CloseButton @click="onClose" />
 		</header>
 		<div class="popover__body">
 			<slot></slot>

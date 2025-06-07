@@ -86,13 +86,13 @@ export default {
 						<Badge v-if="page.frontmatter.status" type="info" :text="page.frontmatter.status" vertical="middle" />
 					</span>
 				</td>
-				<td>{{ this.parseFrontmatterArray(page.frontmatter.test_type) }}</td>
+				<td>{{ parseFrontmatterArray(page.frontmatter.test_type) }}</td>
 				<td v-if="page.frontmatter?.test_lang && (page.frontmatter.source_lang.join() === page.frontmatter.test_lang.join())" colspan="2">
-					{{ this.parseFrontmatterArray(page.frontmatter.source_lang) }}
+					{{ parseFrontmatterArray(page.frontmatter.source_lang) }}
 				</td>
 				<template v-else>
-					<td>{{ this.parseFrontmatterArray(page.frontmatter.source_lang) }}</td>
-					<td>{{ this.parseFrontmatterArray(page.frontmatter?.test_lang ?? page.frontmatter.test_tools) }}</td>
+					<td>{{ parseFrontmatterArray(page.frontmatter.source_lang) }}</td>
+					<td>{{ parseFrontmatterArray(page.frontmatter?.test_lang ?? page.frontmatter.test_tools) }}</td>
 				</template>
 			</tr>
 		</tbody>

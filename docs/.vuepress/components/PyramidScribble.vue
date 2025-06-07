@@ -36,7 +36,7 @@ export default defineComponent({
 	},
 	computed: {
 		dimmed() {
-			return this.isDimmed(this.id);
+			return this?.isDimmed(this.id) ?? false;
 		}
 	},
 	methods: {
@@ -62,8 +62,8 @@ export default defineComponent({
 </script>
 
 <template>
-	<Popper :class="['scribble', `scribble--${id}`, { 'scribble--dimmed' : this.dimmed }]"
-			:show="this.isOpen"
+	<Popper :class="['scribble', `scribble--${id}`, { 'scribble--dimmed' : dimmed }]"
+			:show="isOpen"
 			arrow
 			disableClickAway
 	>
