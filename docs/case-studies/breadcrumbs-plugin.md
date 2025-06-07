@@ -15,7 +15,11 @@ sidebarDepth: 0
 
 Many years ago, before I knew anything about how to do automated testing, I wrote a [WordPress plugin for adding breadcrumb trails to templates](https://github.com/doubleedesign/doublee-breadcrumbs). It was only through usage on several sites that I gradually discovered some bugs and edge cases that needed to be handled better - without breaking existing functionality!
 
-The plugin is written entirely in PHP, and while it includes functions to render the HTML, it doesn't include any front-end styling (that's the responsibility of themes on sites that use it), so he best type of testing to start with is unit testing, which can be done in isolation from the WordPress environment with without any need for a demo site.
+The plugin is written entirely in PHP, and while it includes functions to render the HTML, it doesn't include any front-end styling (that's the responsibility of themes on sites that use it), so the best type of testing to start with is unit testing, which can be done in isolation from the WordPress environment with without any need for a demo site.
+
+:::tip Why unit tests?
+In addition to this particular plugin being independent of front-end styling, unit tests being the most isolated type of tests you can write makes them particularly useful for testing a plugin that is intended for use on multiple sites because it ensures no logic is tied to a specific site's data, theme, or other specifics.
+:::
 
 :::warning
 This is an example of "retrofitting" unit tests to a plugin that has already been developed - it's backwards from the ideal scenario to be gleaning requirements from completed code rather than the test-driven development (TDD) approach of writing out test cases and then writing code that meets those requirements. Let's be real though - this is a  common scenario for many developers who have built things before knowing about testing, who have inherited code that doesn't have unit tests, or simply could not make the time to write tests at the time of development. Better late than never!

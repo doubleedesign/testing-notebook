@@ -1,7 +1,7 @@
 ---
 home: true
 title: Home
-tagline: <strong>A guide to testing</strong> for people <span>who develop websites for people</span>
+tagline: <strong>A guide to testing</strong> for people<br> who <span>develop websites for other people</span>
 actions:
   - text: Learn concepts
     link: /concepts/pyramid.html

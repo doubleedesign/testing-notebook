@@ -101,25 +101,38 @@ export default defineComponent({
 	}
 
 	&--component-level-vr {
-		right: 0;
-		bottom: 40%;
+		right: -16%;
+		bottom: 35%;
+
+		@container (min-width: 440px) {
+			right: 0;
+			bottom: 40%;
+		}
 	}
 
 	&--page-level-vr {
-		left: 16%;
+		left: 0;
 		bottom: 2rem;
+
+		@container (min-width: 440px) {
+			left: 16%;
+		}
 	}
 
 	&__button {
 		border: 0;
 		appearance: none;
 		padding: 0.5rem;
-		font-size: 1.125rem;
+		font-size: 1rem;
 		background: transparent;
 		color: var(--vp-c-text-mute);
-		font-family: "ff-uberhand-pro", sans-serif;
+		font-family: var(--font-family-accent);
 		cursor: pointer;
 		text-wrap: nowrap;
+
+		@container (min-width: 440px) {
+			font-size: 1.125rem;
+		}
 
 		span {
 			display: inline-block;

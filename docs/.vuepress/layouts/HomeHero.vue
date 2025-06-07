@@ -95,7 +95,14 @@ const HomeHeroImage: FunctionalComponent = () => {
 
 <style lang="scss">
 .vp-hero {
-	text-align: start;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	@media (min-width: 1240px) {
+		width: fit-content;
+	}
 }
 
 .vp-hero-image {
@@ -113,17 +120,29 @@ const HomeHeroImage: FunctionalComponent = () => {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1rem;
-	justify-content: flex-start;
+	justify-content: center;
+
+	@media (min-width: 1240px) {
+		width: 100%;
+		justify-content: flex-start;
+	}
 }
 
 .vp-hero-description {
-	max-width: 35rem;
+	width: 100%;
+	font-family: var(--font-family-highlight);
 	color: var(--vp-c-text-mute);
 	font-size: 1.6rem;
 	line-height: 1.3;
+	text-align: center;
 
 	span {
-		display: block;
+		font-family: var(--font-family-accent);
+		font-size: 1.25em;
+	}
+
+	@media (min-width: 1240px) {
+		text-align: start;
 	}
 }
 
@@ -132,11 +151,13 @@ const HomeHeroImage: FunctionalComponent = () => {
 	align-items: center;
 	gap: 0.5rem;
 	box-sizing: border-box;
-	padding: 0.5rem 1.5rem;
+	padding: 0.375rem 1.5rem 0.5rem 1.5rem;
 	border: 1px solid var(--vp-c-accent-bg);
 	border-radius: 0.25rem;
 	background-color: var(--vp-c-bg);
 	color: var(--vp-c-accent);
+	font-family: var(--font-family-highlight);
+	font-weight: 400;
 	font-size: 1.2rem;
 	transition: all var(--vp-t-color);
 

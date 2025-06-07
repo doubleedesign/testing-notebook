@@ -113,7 +113,7 @@ export default defineComponent({
 		cursor: pointer;
 		font-size: 1rem;
 		position: relative;
-		font-family: "ff-uberhand-pro", sans-serif;
+		font-family: var(--font-family-accent);
 		transition: all 0.3s ease;
 		text-decoration: underline;
 		text-decoration-color: transparent;

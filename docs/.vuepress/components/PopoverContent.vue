@@ -102,6 +102,9 @@ export default defineComponent({
 			gap: 0.5rem;
 			align-items: center;
 			color: color-mix(in srgb, var(--vp-c-accent) 70%, white);
+			font-family: var(--font-family-highlight);
+			font-weight: 600;
+			letter-spacing: -0.025em;
 
 			[data-theme="dark"] & {
 				color: var(--vp-c-accent);

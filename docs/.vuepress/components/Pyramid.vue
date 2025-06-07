@@ -129,6 +129,15 @@ export default defineComponent({
 		flex-wrap: wrap;
 		gap: 0.5rem;
 
+		@media (max-width: 700px) {
+			width: 100cqw;
+			margin-block-end: 4rem;
+		}
+
+		@container (min-width: 700px) {
+			height: 700px;
+		}
+
 		figcaption {
 			font-size: 0.8rem;
 			display: block;
@@ -142,6 +151,8 @@ export default defineComponent({
 
 	.slices {
 		width: 100%;
+		container-type: size;
+		padding: 0;
 		height: calc(100% - 2rem); // allow for figcaption
 		display: flex;
 		flex-direction: column-reverse;
@@ -153,11 +164,13 @@ export default defineComponent({
 
 		&__item {
 			width: 100%;
+			margin: 0;
 		}
 
 		&__pair {
 			position: relative;
 			width: 100%;
+			margin: 0;
 		}
 	}
 </style>

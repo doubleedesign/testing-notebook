@@ -176,7 +176,7 @@ There are several tools available for writing and running integration tests, and
 - [Selenium](https://www.selenium.dev/)
 - [Storybook](https://storybook.js.org/docs/writing-tests)
 
-Back-end/API integration testing often shares tooling with unit tests, so is more likely to be language- and framework-specific.
+Back-end/API integration testing often shares tooling with unit tests, so is more likely to be language- and framework-specific. For example, you could use [PHPUnit](https://phpunit.de/) or [Pest](https://pestphp.com/) for PHP and write your tests very similarly to unit tests, except instead of using [mocked/stubbed data](./mocking.md) you would configure it to connect to a real site.
 :::
 
 ## End-to-end (E2E) tests
