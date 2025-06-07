@@ -24,6 +24,23 @@ export default defineUserConfig({
 	}),
 	lang: 'en-AU',
 	title: 'Time for Testing',
+	head: [
+		// Plausible queue script (should come first)
+		[
+			'script',
+			{},
+			'window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }'
+		],
+		// Main Plausible script
+		[
+			'script',
+			{
+				defer: true,
+				'data-domain': 'timefortesting.net',
+				src: 'https://plausible.io/js/script.hash.outbound-links.pageview-props.tagged-events.js'
+			}
+		]
+	],
 	theme: defaultTheme({
 		repo: 'doubleedesign/testing-notebook',
 		repoLabel: 'GitHub',
