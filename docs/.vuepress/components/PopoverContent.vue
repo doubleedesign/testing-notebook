@@ -1,6 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import CloseButton from './CloseButton.vue';
+import { analytics } from '../analytics';
 
 export default defineComponent({
 	name: 'PopoverContent',
@@ -21,20 +22,27 @@ export default defineComponent({
 	},
 	mounted() {
 		(this.$refs.popover as HTMLElement).focus();
-		document.addEventListener('keyup', this.handleKeypress);
+		document.addEventListener('keyup', this.onKeyUp);
 	},
 	beforeUnmount() {
-		document.removeEventListener('keyup', this.handleKeypress);
+		document.removeEventListener('keyup', this.onKeyUp);
 	},
 	methods: {
 		onClose() {
 			this.$emit('close');
 		},
-		handleKeypress(event: KeyboardEvent) {
+		onKeyUp(event: KeyboardEvent) {
 			if (event.key === 'Escape') {
 				this.onClose();
 			}
 		},
+		onLinkClick(event: MouseEvent) {
+			analytics.fireEvent('Pyramid popover link clicked', {
+				title: this.title,
+				href: (event.target as HTMLAnchorElement)?.href,
+				page: window.location.pathname
+			});
+		}
 	}
 });
 </script>
@@ -51,7 +59,7 @@ export default defineComponent({
 			<slot></slot>
 		</div>
 		<footer class="popover__footer">
-			<router-link :to="link">Read more</router-link>
+			<router-link :to="link" @click="onLinkClick">Read more</router-link>
 		</footer>
 	</section>
 </template>

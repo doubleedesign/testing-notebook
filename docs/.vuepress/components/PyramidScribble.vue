@@ -2,6 +2,7 @@
 import { defineComponent, PropType } from 'vue';
 import Popper from 'vue3-popper';
 import PopoverContent from './PopoverContent.vue';
+import { analytics } from '../analytics';
 
 export default defineComponent({
 	name: 'PyramidScribble',
@@ -43,6 +44,10 @@ export default defineComponent({
 		onOpen: function() {
 			this.isOpen = true;
 			this.$emit('onOpenPopover', this.id);
+			analytics.fireEvent('Pyramid popover opened', {
+				title: this.title,
+				source: this.label,
+			});
 		},
 		onClose: function() {
 			this.isOpen = false;
