@@ -1,7 +1,7 @@
 ---
 home: true
 title: Home
-tagline: A guide to testing for people<br> who develop websites <span>for other people</span>
+tagline: A <strong>guide to testing</strong> for <br> people who <span>develop websites</span> <br><small>for <span>other people</span></small>
 actions:
   - text: Learn concepts
     link: /benefits.md

@@ -37,7 +37,7 @@ examples and use cases can be found in the [Examples](../examples/overview.md) a
 
 ### Patchwork
 
-[Patchwork](https://antecedent.github.io/patchwork/) is a simple, easy-to-use library for replacing **global functions** and static methods with fake test versions in PHP. It allows you to override the behavior of functions during tests. It doesn't require any global setup or teardown, making it easy to use for individual test cases and very practical for mocking procedural code.
+[Patchwork](https://antecedent.github.io/patchwork/) is an easy-to-use library for replacing **global functions** and static methods with fake test versions in PHP. It allows you to override the behavior of functions during tests. It doesn't require any global setup or teardown, making it easy to use for individual test cases and very practical for mocking procedural code.
 
 :::note
 Example to come

@@ -1,7 +1,10 @@
-<script>
+<script lang="ts">
 import { usePageData } from '@vuepress/client';
+// @ts-ignore
 import { usePages as useExamplePages } from '@temp/examples-pages';
+// @ts-ignore
 import { usePages as useCaseStudyPages } from '@temp/case-studies-pages';
+// @ts-ignore
 import { usePages as useToolingPages } from '@temp/tooling-pages';
 
 export default {
@@ -26,7 +29,7 @@ export default {
 	},
 	computed: {
 		sectionPages() {
-			if (Object.keys(this.pages).length === 0 || !Object.keys(this.pages).includes(this.section) === -1) {
+			if (Object.keys(this.pages).length === 0) {
 				return [];
 			}
 
@@ -50,7 +53,7 @@ export default {
 				return orderA - orderB;
 			});
 		},
-		parseFrontmatterArray(theArray) {
+		parseFrontmatterArray(theArray: string[] | undefined) {
 			if(!theArray) return '';
 			const asString = theArray.toString().replace('[', '').replace(']', '');
 			const result = asString.split(',');

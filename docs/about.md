@@ -1,6 +1,6 @@
 # About
 
-Hi! [I'm Leesa with a Double-E](https://www.doubleedesign.com.au), and I'm a web designer/developer and front-end software engineer with a passion for building maintainable, extensible websites and applications. My approach to development is informed by my cross-section of experiences in agencies, in enterprise, and as a freelancer.
+Hi! [I'm Leesa with a Double-E](https://www.doubleedesign.com.au), and I'm a web designer/developer and front-end software engineer with a passion for building robust, maintainable, extensible websites and applications. My approach to development is informed by my cross-section of experiences in agencies, in enterprise, and as a freelancer.
 
 This site is initially a somewhat informal companion to my talk _Catching all the (edge) cases: Getting started with automated testing_ at [WordCamp Brisbane 2025](https://brisbane.wordcamp.org/2025/schedule/), and is also a place to gather my learnings and examples that build upon and expand beyond the content of the talk, continuing into the future.
 

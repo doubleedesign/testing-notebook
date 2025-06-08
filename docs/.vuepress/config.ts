@@ -96,7 +96,7 @@ export default defineUserConfig({
 			},
 			{
 				text: 'Case Studies',
-				link: '/examples/overview.html',
+				link: '/case-studies/overview.html',
 				collapsible: true,
 				children: getPagesFromSubfolder(path.resolve(__dirname, '../case-studies')),
 			},

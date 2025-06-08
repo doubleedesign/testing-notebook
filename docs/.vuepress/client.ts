@@ -3,7 +3,8 @@ import { analytics } from './analytics';
 
 export default defineClientConfig({
 	enhance({ app, router }) {
-
+		if(typeof window === 'undefined') return;
+        
 		/**
          * Plausible Analytics events on native VuePress components
          * (custom Vue components in ./vuepress/components/ have the events in their own methods)

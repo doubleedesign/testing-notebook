@@ -40,7 +40,6 @@ export default defineComponent({
 			analytics.fireEvent('Pyramid popover link clicked', {
 				title: this.title,
 				href: (event.target as HTMLAnchorElement)?.href,
-				page: window.location.pathname
 			});
 		}
 	}
