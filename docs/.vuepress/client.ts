@@ -54,6 +54,13 @@ export default defineClientConfig({
 				}
 			}
 
+			// Table of contents links
+			if((event.target as HTMLElement).closest('.table-of-contents')) {
+				analytics.fireEvent('Table of contents link clicked', {
+					label: (event.target as HTMLElement).textContent?.trim()
+				});
+			}
+
 			// Details panels
 			if((event.target as HTMLElement).tagName === 'SUMMARY') {
 				const opened = !(event.target as HTMLElement).parentElement?.hasAttribute('open');
