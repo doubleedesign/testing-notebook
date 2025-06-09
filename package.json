@@ -29,6 +29,7 @@
 	},
 	"dependencies": {
 		"@vuepress/client": "^2.0.0-rc.23",
+		"@vuepress/plugin-markdown-tab": "^2.0.0-rc.108",
 		"vue3-popper": "^1.5.0"
 	}
 }

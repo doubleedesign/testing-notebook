@@ -35,11 +35,16 @@ export default {
 
 			const result = this.sortPages(
 				this.pages[this.section].filter(page => {
-					return page.frontmatter && page.frontmatter.title !== 'Overview';
+					return page.frontmatter && (page.frontmatter.title !== 'Overview');
 				})
-			);
+			).filter(page => {
+				const pathPieces = page.path.split('/');
+				if (pathPieces.at(-1) === 'overview.html') {
+					return true;
+				}
 
-			//console.log(result);
+				return pathPieces.length <= 3;
+			});
 
 			return result;
 		}

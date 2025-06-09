@@ -3,6 +3,7 @@ import { defaultTheme } from '@vuepress/theme-default';
 import { defineUserConfig } from 'vuepress';
 import { registerComponentsPlugin } from '@vuepress/plugin-register-components';
 import { markdownExtPlugin } from '@vuepress/plugin-markdown-ext';
+import { markdownTabPlugin } from '@vuepress/plugin-markdown-tab';
 import { prismjsPlugin } from '@vuepress/plugin-prismjs';
 import { searchPlugin } from '@vuepress/plugin-search';
 import { usePagesPlugin } from 'vuepress-plugin-use-pages';
@@ -98,7 +99,15 @@ export default defineUserConfig({
 				text: 'Case Studies',
 				link: '/case-studies/overview.html',
 				collapsible: true,
-				children: getPagesFromSubfolder(path.resolve(__dirname, '../case-studies')),
+				children: [
+					...getPagesFromSubfolder(path.resolve(__dirname, '../case-studies')),
+					{
+						text: 'Custom Pricing (WooCommerce)',
+						link: '/case-studies/wc-custom-pricing/overview.html',
+						children: getPagesFromSubfolder(path.resolve(__dirname, '../case-studies/wc-custom-pricing'))
+							.filter(page => page.text !== 'Custom Pricing (WooCommerce)')
+					}
+				]
 			},
 			{
 				text: 'Troubleshooting',
@@ -120,6 +129,9 @@ export default defineUserConfig({
 		markdownExtPlugin({
 			gfm: true,
 			footnote: true
+		}),
+		markdownTabPlugin({
+			tabs: true,
 		}),
 		prismjsPlugin({
 			theme: 'coldark-dark',

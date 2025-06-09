@@ -8,7 +8,7 @@ test_tools: [Pest]
 sidebarDepth: 0
 ---
 
-# Example: Unit testing a WordPress plugin
+# Case Study: Unit testing a WordPress plugin
 
 [[toc]]
 

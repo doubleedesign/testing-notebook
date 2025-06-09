@@ -11,3 +11,5 @@ This section contains detailed start-to-finish case studies including context, s
 Smaller examples and standalone snippets can be found in the [Examples](../examples/overview.md) section.
 
 <SectionTOC></SectionTOC>
+
+More detailed case studies like the pricing one, which cover multiple testing types, will be added in the future. Contributions of your own case studies via [GitHub pull request](https://github.com/doubleedesign/testing-notebook) are welcome.
