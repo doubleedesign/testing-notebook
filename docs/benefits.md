@@ -1,4 +1,7 @@
-# Why use automated testing?
+---
+title: Benefits
+heading: Why use automated testing?
+---
 
 If you are a web developer, using automated testing as part of your workflow can help you:
 
@@ -14,7 +17,7 @@ A comprehensive test suite can serve as:
  - a safety net for refactoring and improving existing code, by automatically verifying that the changes do not have unintended consequences. 
 :::
 
-:::details Provide plain-language dev documentation
+:::details Write plain-language dev documentation
 Automated tests can serve as a form of documentation for your code, providing clear statements of requirements and examples of how different parts of the site are expected to behave. 
 
 When using a Test-Driven Development (TDD) approach, you can write tests before implementing features. This can help you:

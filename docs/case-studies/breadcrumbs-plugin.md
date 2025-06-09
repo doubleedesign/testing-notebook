@@ -1,5 +1,6 @@
 ---
 title: Breadcrumbs Plugin (WordPress)
+heading: Unit testing a WordPress plugin
 order: 1
 status: drafting
 source_lang: [PHP]
@@ -7,8 +8,6 @@ test_type: [Unit]
 test_tools: [Pest]
 sidebarDepth: 0
 ---
-
-# Case Study: Unit testing a WordPress plugin
 
 [[toc]]
 

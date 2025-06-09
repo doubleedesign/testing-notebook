@@ -1,5 +1,6 @@
 ---
 title: BrainMonkey vs WP_Mock
+heading: BrainMonkey vs WP_Mock
 order: 2
 status: drafting
 source_lang: [PHP (WordPress)]
@@ -7,8 +8,6 @@ test_lang: [PHP]
 test_type: [Unit]
 sidebarDepth: 0
 ---
-
-# BrainMonkey vs WP_Mock
 
 BrainMonkey and WP_Mock are both libraries designed to facilitate unit testing in WordPress by simplifying the [mocking](../concepts/mocking.md) of WordPress functions. Examples of use of each can be found in the [Case Studies](../case-studies/overview.md) section.
 

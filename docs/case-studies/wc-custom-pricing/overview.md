@@ -1,5 +1,6 @@
 ---
 title: Custom Pricing (WooCommerce)
+heading: Custom Pricing for a WooCommerce site
 order: 0
 status: drafting
 source_lang: [PHP]
@@ -7,8 +8,6 @@ test_type: [Unit,Integration,E2E]
 test_tools: [Pest,Playwright]
 sidebarDepth: 0
 ---
-
-# Case Study: Custom Pricing for a WooCommerce site
 
 This case study showcases an example of how different types of testing can be used to test the same functionality. It is designed to explore:
 - some of the ways that different types of testing can complement each other

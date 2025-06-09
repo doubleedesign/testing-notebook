@@ -1,5 +1,6 @@
 ---
 title: "Part 2: Integration testing with the WP REST API"
+heading: "Using the WP REST API to integration test a plugin"
 order: 2
 status: drafting
 source_lang: [PHP]
@@ -7,8 +8,6 @@ test_type: [Integration]
 test_tools: [Pest, Jest]
 sidebarDepth: 0
 ---
-
-# Using the WordPress REST API to integration test a plugin
 
 :::info
 This article follows on from the [Custom Pricing](wc-custom-pricing.md) case study, but can be used as a general guide as well.

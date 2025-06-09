@@ -1,4 +1,7 @@
-# Setting up for testing in your project
+---
+title: Getting Started
+heading: Setting up for testing in your project
+---
 
 The exact setup for testing in your project will depend on the nature of your project and the tools and frameworks you are using. Below is some general guidance related to the examples and case studies in this site.
 

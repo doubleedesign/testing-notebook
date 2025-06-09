@@ -1,7 +1,11 @@
 import { defineClientConfig } from '@vuepress/client';
 import { analytics } from './analytics';
+import Layout from './layouts/Layout.vue';
 
 export default defineClientConfig({
+	layouts: {
+		Layout
+	},
 	enhance({ app, router }) {
 		if(typeof window === 'undefined') return;
         

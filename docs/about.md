@@ -1,4 +1,7 @@
-# About
+---
+title: About
+heading: About
+---
 
 Hi! [I'm Leesa with a Double-E](https://www.doubleedesign.com.au), and I'm a web designer/developer and front-end software engineer with a passion for building robust, maintainable, extensible websites and applications. My approach to development is informed by my cross-section of experiences in agencies, in enterprise, and as a freelancer.
 

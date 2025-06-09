@@ -1,4 +1,7 @@
-# Troubleshooting
+---
+title: Troubleshooting
+heading: Troubleshooting
+---
 
 This page is a general dumping ground for troubleshooting tips and common issues encountered when working with the tools and techniques discussed in this documentation. 
 

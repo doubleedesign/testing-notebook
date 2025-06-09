@@ -7,6 +7,7 @@ import { markdownTabPlugin } from '@vuepress/plugin-markdown-tab';
 import { prismjsPlugin } from '@vuepress/plugin-prismjs';
 import { searchPlugin } from '@vuepress/plugin-search';
 import { usePagesPlugin } from 'vuepress-plugin-use-pages';
+import { readingTimePlugin } from '@vuepress/plugin-reading-time';
 import { getDirname, path } from '@vuepress/utils';
 import matter from 'gray-matter';
 
@@ -18,7 +19,8 @@ export default defineUserConfig({
 		viteOptions: {
 			resolve: {
 				alias: {
-					'@theme/VPHomeHero.vue': path.resolve(__dirname, 'layouts/HomeHero.vue')
+					'@theme/VPHomeHero.vue': path.resolve(__dirname, 'layouts/HomeHero.vue'),
+					'@theme/Layout.vue': path.resolve(__dirname, 'layouts/Layout.vue'),
 				}
 			}
 		}
@@ -149,6 +151,11 @@ export default defineUserConfig({
 		usePagesPlugin({
 			startsWith: '/tooling/',
 			file: 'tooling-pages.js'
+		}),
+		readingTimePlugin({
+			// a little lower than average silent reading speed according to https://www.sciencedirect.com/science/article/abs/pii/S0749596X19300786
+			// because this is technical information so more likely to be read slower
+			wordPerMinute: 150
 		}),
 	]
 });
