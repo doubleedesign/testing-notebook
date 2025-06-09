@@ -116,7 +116,7 @@ export default defineUserConfig({
 				link: '/troubleshooting.html',
 			},
 			{
-				text: 'Further Reading',
+				text: 'Further Resources',
 				link: '/resources.html',
 			}
 		],
