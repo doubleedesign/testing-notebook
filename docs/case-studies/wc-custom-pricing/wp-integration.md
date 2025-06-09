@@ -9,10 +9,6 @@ test_tools: [Pest, Jest]
 sidebarDepth: 0
 ---
 
-:::info
-This article follows on from the [Custom Pricing](wc-custom-pricing.md) case study, but can be used as a general guide as well.
-:::
-
 [[toc]]
 
 ## Rationale
@@ -247,8 +243,6 @@ Example to come.
 :::
 
 You may notice that the test cases line up to the unit test cases. This is intentional, as the integration tests are designed to ensure that the plugin logic works correctly in the real system, the same as it does when the data is mocked/stubbed.
-
-## Comparing unit, integration, and E2E tests
 
 
 ## Useful links

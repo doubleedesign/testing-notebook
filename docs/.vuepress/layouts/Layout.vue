@@ -38,7 +38,7 @@ watch(() => route.path, () => {
 	if (route.path.includes('/tooling/')) {
 		isToolingStudy = true;
 	}
-	if (route.path.endsWith('/overview.html')) {
+	if (route.path.endsWith('/overview.html') && route.path.split('/').length < 4) {
 		shouldShowReadingData = false;
 		isCaseStudy = false;
 		isExample = false;
