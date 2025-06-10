@@ -361,6 +361,45 @@ div[vp-content] {
 			// May require adjustment if I add tables that don't have emojis but do have multiline text
 			text-indent: 1.65em hanging;
 		}
+
+		&.case-study-findings-table {
+
+			thead,
+			tbody {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+			}
+
+			tr {
+				display: contents;
+			}
+
+			th, td {
+			}
+
+			thead > tr > th:first-of-type,
+			th[scope="row"] {
+			}
+
+			th[colspan="2"],
+			td[colspan="2"] {
+				grid-column: span 2;
+			}
+
+			th[rowspan="2"],
+			td[rowspan="2"] {
+				grid-row: auto / span 2;
+			}
+
+			ul {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+
+				li {
+				}
+			}
+		}
 	}
 }
 

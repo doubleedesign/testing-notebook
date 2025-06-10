@@ -156,9 +156,9 @@ Front-end integration tests can be run in a browser, or using a headless browser
 :::info Unit vs integration vs E2E
 I think of integration tests as being "a step up from unit/component tests" and "a step down from end-to-end tests". For example:
 - Unit testing a UI component -> step up and test it in the browser in the context of a template part 
-- Component testing a single UI component -> step up and test it in the browser in the context of a page layout
-- Unit testing a back-end function with mocks/stubs -> step up and replace the mocks/stubs with an API or database call
-- Testing a page layout -> step down from E2E testing and test a demo page with placeholder data in the browser, instead of fetching the content from the real database
+- Component testing a single UI component -> step up and test it in the browser in the context of a page layout (using the same tooling)
+- Unit testing a back-end function with mocks/stubs -> step up and replace the mocks/stubs with an API or database call (using the same tooling)
+- Testing a page layout -> step down from E2E testing and test a demo page with placeholder data in the browser, instead of fetching the content from the real database (using the same tooling)
 - Testing a back-end function by visiting the page that uses it in the browser -> step down from E2E testing and test the function in isolation with a real database/API call to get just the data, not the whole page.
 
 

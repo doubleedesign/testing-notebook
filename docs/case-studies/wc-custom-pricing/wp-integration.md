@@ -48,24 +48,24 @@ I have put them in a `.env` file within the integration test folder in my plugin
 Pick your poison! Because we're going to be testing by querying an API endpoint, you can use any testing framework that allows you to make HTTP requests and parse JSON responses.
 
 - If you've already written unit tests using [PHPUnit](https://phpunit.de/) or [Pest](https://pestphp.com/), you can step that up a notch and use those same tools to write integration tests
-- If your source code and unit tests are in JavaScript, or you simply prefer JavaScript, you can use [Jest](https://jestjs.io/) or similar
+- If your source code and unit tests are in JavaScript, or you simply prefer JavaScript and you don't need coverage reporting, you can use [Jest](https://jestjs.io/) or similar
 - If you use Postman for testing and debugging your API responses, you can also [write tests in Postman itself](https://learning.postman.com/docs/tests-and-scripts/write-scripts/test-scripts/).
+
+:::important
+The below examples are written in PHP with [Pest](https://pestphp.com/), because as mentioned above, to test PHP code with coverage reporting, you need to write your tests in PHP too - and I want coverage reporting!
+
+In my case, it was also a straightforward translation from unit tests to corresponding integration tests, meaning it's not much extra work and the comparison is more useful for the purposes of this case study (see the [Findings](./overview.md#findings) section on the first page for more about that).
+:::
 
 #### Supporting libraries
 - For Pest:
   - for ease of making HTTP requests, I am using [Guzzle HTTP client](https://docs.guzzlephp.org/en/stable/) 
   - access the user credentials stored in `.env` in a non-standard location, I am using [phpdotenv](https://github.com/vlucas/phpdotenv)
-- For Jest:
-  - Details to come.
 
 #### Setup code and utilities
-There is often common setup or utility code that is needed across all tests that can be put into a configuration or setup file. Below are some examples of this in different frameworks.
+There is often common setup or utility code that is needed across all tests that can be put into a configuration or setup file.
 
-::: tabs#tabsync
-
-@tab PHP (Pest)
-
-The below code sets up a single Guzzle HTTP client that can be used in all tests with consistent configuration, such as the base URI for the API endpoint. It also sets up a utility specific to my use case that simplifies getting user credentials. 
+For Pest, the below code sets up a single Guzzle HTTP client that can be used in all tests with consistent configuration, such as the base URI for the API endpoint. It also sets up a utility specific to my use case that simplifies getting user credentials. 
 
 ```php
 <?php
@@ -105,13 +105,6 @@ $response = TestUtils::$client->request('GET', 'products/100', [
     ]
 ]);
 ```
-
-@tab JavaScript (Jest)
-
-Example to come.
-
-:::
-
 
 
 ## Handling authentication
@@ -194,10 +187,6 @@ At this point, I like to test some API requests using Postman or similar to ensu
 
 With that out of the way, here's some examples of test code for the [Custom Pricing](wc-custom-pricing.md) case study! 
 
-::: tabs#tabsync
-
-@tab PHP (Pest)
-
 ```php
 <?php /** @noinspection PhpUnhandledExceptionInspection */
 namespace Doubleedesign\Pricing\Tests\Integration;
@@ -234,13 +223,6 @@ describe('Item pricing', function()  {
 	});
 });
 ```
-
-
-@tab JavaScript (Jest)
-
-Example to come.
-
-:::
 
 You may notice that the test cases line up to the unit test cases. This is intentional, as the integration tests are designed to ensure that the plugin logic works correctly in the real system, the same as it does when the data is mocked/stubbed.
 

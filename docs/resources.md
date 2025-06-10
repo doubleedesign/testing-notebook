@@ -15,3 +15,4 @@ heading: Further Resources
 ## Blog posts
 - [Mastering the Art of Sorcery: An Advanced Guide to Unit Testing for WordPress Plugins](https://starryarray.com/mastering-the-art-of-sorcery-an-advanced-guide-to-unit-testing-for-wordpress-plugins/) by Olena Zhyvohliad
 - [The Practice of WordPress Unit Testing](https://wp-punk.com/the-practice-of-wordpress-unit-testing/) by Maksym Denysenko
+- [Unit Testing Classes That Call Functions From WordPress Core](https://dev.to/shelob9/unit-testing-classes-that-call-functions-form-wordpress-core-3h5p) by Josh Pollock
