@@ -19,7 +19,7 @@ You might also find the [FAQ](./faq.md) section helpful for determining which ty
 
 ## Unit tests
 
-Unit tests are for testing individual functions or methods in isolation. Unit tests are run using a Command Line Interface (CLI) tool, or IDE-integrated plugin (that is effectively using the CLI under the hood, with added features).
+**Unit tests** are for testing individual functions or methods in isolation. Unit tests are run using a Command Line Interface (CLI) tool, or IDE-integrated plugin (that is effectively using the CLI under the hood, with added features).
 
 Unit tests are typically the simplest to write and the fastest to run, as they focus on small, isolated pieces of code. They do not require a browser and do not generally  test the interaction between different features. (If your unit tests are slow to run or require complex setup, that may be a sign that they're trying to do too much, and should either be split into smaller tests or refactored into a more suitable type of test.)
 
@@ -127,7 +127,7 @@ Component testing shares its tooling with UI integration tests, because usually 
 
 ## Visual Regression (VR) tests
 
-Visual regression tests involve checking the visual appearance of a user interface against a baseline to ensure that no unintended changes have occurred. They compare screenshots of the current UI with previously approved versions, highlighting any _visual_ differences. 
+**Visual regression tests** involve checking the visual appearance of a user interface against a baseline to ensure that no unintended changes have occurred. They compare screenshots of the current UI with previously approved versions, highlighting any _visual_ differences. 
 
 This means, for example, that if you change some CSS for spacing from `padding` on child items to `grid-gap` on a parent, the visual regression test will only catch it if the final visual appearance of the component changes. If the spacing is still visually the same, the test will pass, even though the underlying code has changed.
 
@@ -148,17 +148,21 @@ There are several tools available for writing and running visual regression test
 
 ## Integration tests
 
-Integration tests are designed to test how different parts of a system work together. In the context of front-end web development, this means testing combinations of UI components, or the interaction between parts of the front-end and the relevant back-end APIs or functions.
+**Integration tests** are designed to test how different parts of a system work together. In the context of front-end 
+web development, this means testing combinations of UI components, or the interaction between parts of the front-end and the relevant back-end APIs or functions.
 
 Front-end integration tests can be run in a browser, or using a headless browser (a browser that runs in the background, without a graphical user interface you can see). For back-end integrations, such as testing integration with a database or an API, integration tests may be run using a Command Line Interface (CLI) tool or an equivalent IDE plugin.
 
-:::info Integration vs end-to-end tests
-The line between integration and end-to-end tests can be blurry, as both types of tests can involve multiple components and interactions and often use the same tooling. You might be testing the _integration_ of your code with that of a plugin in your CMS, but the only way you can practically do that is with a dev or staging site, which moves it into the realm of _end-to-end_ testing. 
+:::info Unit vs integration vs E2E
+I think of integration tests as being "a step up from unit/component tests" and "a step down from end-to-end tests". For example:
+- Unit testing a UI component -> step up and test it in the browser in the context of a template part 
+- Component testing a single UI component -> step up and test it in the browser in the context of a page layout
+- Unit testing a back-end function with mocks/stubs -> step up and replace the mocks/stubs with an API or database call
+- Testing a page layout -> step down from E2E testing and test a demo page with placeholder data in the browser, instead of fetching the content from the real database
+- Testing a back-end function by visiting the page that uses it in the browser -> step down from E2E testing and test the function in isolation with a real database/API call to get just the data, not the whole page.
 
-Consequently, you may see these terms used interchangeably, or referred to by the name of the main tool used to avoid confusion within a team (e.g, "Playwright tests" or "Cypress tests"). 
 
-For front-end development, one distinctive feature could be whether you're fetching and rendering real data from a live API or database (end-to-end test), or using mocked/demo/example data (integration test).
-
+:::details Read more
 Integration tests typically take up more of the testing pyramid than E2E than as shown in [mine](./pyramid.md), but for CMS-driven sites the practical opportunities for integration testing beyond UI components are very limited - usually we're either testing single pieces in isolation (unit and components tests), or we're testing them in a full website. If you have unit tests, then setting up integration of plugins and parts of the CMS just for testing is usually not worth the effort compared to just doing the same thing as an end-to-end test in a dev/staging site. That said, there may be some situations where you use integration tests instead of unit tests because they strike a balance between speed and real-world data; when using something like WordPress it is rare to use unit and integration without end-to-end (or manual testing the same cases E2E would cover), because of all the other factors that can impact the final result on the full website.
 :::
 
@@ -169,26 +173,31 @@ You might want to use integration tests when you are:
 :::
 
 :::details Tooling for integration tests
-There are several tools available for writing and running integration tests, and for the front-end these are generally independent of the language or framework your code is written in because you are using them to visit a webpage in the browser,  not interact with the code. Examples include:
+The tools you can use for integration tests depend on what type of integration you are testing.
+
+For the front-end these are generally independent of the language or framework your code is written in because you are using them to visit a webpage in the browser,  not interact with the code. Examples include:
 - [Playwright](https://playwright.dev/)
 - [Cypress](https://www.cypress.io/)
 - [Selenium](https://www.selenium.dev/)
 - [Storybook](https://storybook.js.org/docs/writing-tests)
 
-Back-end/API integration testing often shares tooling with unit tests, so is more likely to be language- and framework-specific. For example, you could use [PHPUnit](https://phpunit.de/) or [Pest](https://pestphp.com/) for PHP and write your tests very similarly to unit tests, except instead of using [mocked/stubbed data](./mocking.md) you would configure it to connect to a real site.
+Back-end/API integration testing often shares tooling with unit tests, so is more likely to be language- and framework-specific. For example:
+- You could use [PHPUnit](https://phpunit.de/) or [Pest](https://pestphp.com/) for PHP and write your tests very similarly to unit tests, 
+- likewise using Jest for JavaScript,
+except instead of using [mocked/stubbed data](./mocking.md) you would configure it to connect to a real site.
 :::
 
 ## End-to-end (E2E) tests
 
-End-to-end tests are designed to test the entire application flow, from the user's perspective. They simulate real user interactions with the website,  such as clicking buttons, filling out forms, and navigating between pages. E2E tests are typically run in a real browser or a headless browser, visiting the actual website (or a staging copy!) and  performing actions as a user would.
+**End-to-end tests** are designed to test the entire application flow, from the user's perspective. They simulate real user interactions with the website,  such as clicking buttons, filling out forms, and navigating between pages. E2E tests are typically run in a real browser or a headless browser, visiting the actual website (or a staging copy!) and  performing actions as a user would.
 
 :::tip
 If you are not writing any custom code, end-to-end tests are usually the best go-to for a CMS-driven website. For example, if you have pieced together a WordPress site with a theme and some plugins from various vendors, testing user journeys through your actual website is probably the best use of your testing time and resources.
 
-Unit and integration testing is generally the domain of the developer, so if you do want to test at a lower level you should first check if tests have been included in the codebase.
+Unit and integration testing is generally the domain of the developer, so if you do want to test at a lower level you should first check if tests have already been included in the codebase.
 :::
 
-:::info
+:::note
 E2E tests take up more of [my testing pyramid](./pyramid.md) than they typically do in more general testing advice. This is because in the context of CMS-driven sites, separating out the relevant parts of the CMS and/or plugins to do integration tests is often not practical - doing the same things in an E2E test in a dev/staging site is usually easier and achieves the same goal. 
 
 E2E testing is also the most accessible for non-developers who are using third-party themes and plugins, as well as being practical for developers integrating with third-party plugins.

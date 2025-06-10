@@ -37,7 +37,7 @@ watch(() => route.path, () => {
 	if (route.path.includes('/examples/')) {
 		isExample = true;
 	}
-	if (route.path.includes('/tooling/')) {
+	if (route.path.includes('/tooling/') && !route.path.endsWith('/overview.html')) {
 		isToolingStudy = true;
 	}
 	if (route.path.endsWith('/overview.html') && route.path.split('/').length < 4) {
