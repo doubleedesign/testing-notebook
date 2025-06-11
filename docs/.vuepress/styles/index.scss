@@ -400,6 +400,24 @@ div[vp-content] {
 				}
 			}
 		}
+
+		&.case-study-wc-implementation-overview-table {
+
+			tr {
+				display: grid;
+				grid-template-columns: repeat(5, 1fr);
+			}
+
+			td, th {
+				text-indent: 0;
+				grid-column: span 2;
+			}
+
+			thead th:first-of-type,
+			th[scope="row"] {
+				grid-column: span 1;
+			}
+		}
 	}
 }
 

@@ -1,6 +1,6 @@
 ---
 title: "Part 3: E2E Testing"
-heading: "E2E testing a customised eCommerce site"
+heading: "E2E testing custom pricing in a WooCommerce site"
 order: 3
 status: drafting
 source_lang: [PHP]

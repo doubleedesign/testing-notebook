@@ -19,7 +19,9 @@ I'm under no illusions that most developers will be able to utilise all possible
 
 ## The case study brief
 
-This case study is not of a single real project or client, but rather a combination of common requirements that I encountered when I worked at an agency with multiple ecommerce clients.
+:::note
+This case study is not of a single real project or client, but rather a combination of common requirements that I encountered when I worked at an agency with multiple ecommerce clients who had special customer groups and associated custom requirements for things like pricing and shipping.
+:::
 
 "Demo Dance" is a fictional dancewear supplier that sells shoes, leotards, tights, accessories, etc., to private individuals as well as providing bulk ordering to dance schools and studios. They require special pricing rules for different customer groups:
 - Anonymous or general retail customers
@@ -31,9 +33,17 @@ Pricing requirements include:
   - Regular price (built into WC)
   - Sale price (built into WC)
   - Individual member price (custom field)
-  - Dance school price (custom field)
-- School price kicks in at category level 
+  - Dance school bulk order price (custom field)
+- Dance school price kicks in at category level
+- Bulk pricing fields per category:
+  - Price type: Minimum order (e.g., price break at 10) or grouped order (discount per item when purchased in groups of X)
+  - Quantity to quality for bulk pricing
+- Variable products always inherit prices from the parent product
 - Customer should always get the lowest price per item that they are eligible for.
+
+Out of scope at this stage but may be added later:
+- Product types other than simple and variable, such as grouped products
+- Product bundles (e.g., leotard and tights together = discounted tights).
 
 :::note Aren't there plugins for this?
 Yes, there are existing plugins that might meet this requirement such as [WooCommerce Role-Based Pricing](https://woocommerce.com/products/role-based-pricing-for-woocommerce/). However, that's really not the point here - this case study is about demonstrating testing as part of the workflow for a custom implementation of something. So if you're the kind of person who immediately reaches for a plugin, please imagine that:
@@ -46,24 +56,66 @@ Yes, there are existing plugins that might meet this requirement such as [WooCom
 
 ## Some background understanding
 
-### Individual product prices in WooCommerce
-
-**Note:** This case study uses simple products only at this stage.
-
 There are three built-in price fields in WooCommerce that we need to understand:
 1. `regular_price` - the normal price of the product.
 2. `sale_price` - the price of the product when it is on sale.
-3. `price` - the price that is actually given to the customer, which (by default) is either the `regular_price` or the `sale_price`, depending on whether the product is on sale.
+3. `price` - the price that is actually given to the customer, which (by default) is either the regular price or the sale price, depending on whether the product is on sale.
 
-The code I have written for this case study "intercepts" the setting of the `sale_price` and `price` fields using WooCommerce filter hooks.
+These price fields work out of the box for simple products. Conversely, the default behaviour of variable products is that each field exists individually on the variations. My plugin overrides this behaviour so that variable products have editable regular and sale price fields just like simple products, and their values are propagated to variations on save.
 
-It intercepts the setting of the `sale_price` field and sets it to no sale price if the user is a member and the member price is lower, because otherwise the final price field would reflect the sale price even if the member price is lower; and we don't want to set the sale price to the member price, as that would be misleading. This way, members simply do not see sale prices if the member price is lower.
+WordPress has built-in functions for adding and retrieving custom metadata, which we can use for the custom prices by using functions provided by WooCommerce to add additional input fields in the product editing screen and handle their values on save.
 
-It does not intercept the setting of the `regular_price` field, to ensure minimal data changes and enable front-end display of the regular price to members so they can see the discount they're getting (note: that is not automatic; it needs to be implemented in the front-end templates).
+:::note
+Details on the structures relevant to bulk pricing still to come.
+:::
 
-I have added a field to the product editor for each of the custom prices, which are stored in product meta and thus can be retrieved using the `get_post_meta()` function. This data is used in the function that updates the `price` field.
+## Implementation overview
 
+I have added a field to the product editor for each of the custom prices (such as member prices), which are stored in product meta and thus can be retrieved using the `get_post_meta()` function. This data is used in the functions that update the built-in price fields as described below.
+
+_For brevity, I have not specified eligibility criteria in this table. Please assume where I have specified a custom price field, the change described only applies for eligible customers and otherwise stays the same as the default WooCommerce behaviour._
+
+<table class="case-study-wc-implementation-overview-table">
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Simple product</th>
+            <th>Variable product</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row"><code>regular_price</code></th>
+            <td>No change (See note 1)</td>
+            <td>Set on product meta save</td>
+        </tr>
+        <tr>
+            <th scope="row"><code>sale_price</code></th>
+            <td>Update to empty if member price is lower</td>
+            <td>Set on product meta save; set to empty if member price is lower</td>
+        </tr>
+        <tr>
+            <th scope="row"><code>price</code></th>
+            <td>Update to member price if that's the lowest</td>
+            <td>Set to member price if lower, otherwise set to lower of regular or sale price</td>
+        </tr>
+    </tbody>
+</table>
+
+The code I have written for this case study "intercepts" the setting of the price fields using WooCommerce filter and action hooks.
+
+:::info
+The complete site code including test files is available on [GitHub](https://github.com/doubleedesign/demo-dance).
+:::
+
+:::details Notes
+- **Note 1:** The plugin does not intercept the setting of the `regular_price` field for simple products, to ensure minimal data changes and to enable front-end display of the regular price to members so they can see the discount they're getting (note: that is not automatic; it needs to be implemented in the front-end templates).
+:::
+
+:::tip
 There are a few ways you can check the raw data of a product if you know its ID:
+:::
+
 :::details In the database
 **Note:** This method is unaffected by the custom code and does not account for user roles or other context.
 

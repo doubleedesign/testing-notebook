@@ -114,6 +114,8 @@ authenticate your requests accordingly. In this guide I have used basic authenti
 
 :::danger
 It is important to be mindful of security when handling authentication in your tests. Do not hard-code sensitive credentials in your test files, and ensure that any test accounts you create have the minimum necessary permissions. This is one of the reasons it is advisable to test on a separate dev/staging site that does not contain any sensitive client or user data, not the real site.
+
+The test user credentials for the demo site are stored in plain text and put on GitHub for convenience and because there's no sensitive data (likewise for the database dump being included in the repo). This is absolutely not recommended for production sites or staging sites derived from production sites.
 :::
 
 ### With an application password
@@ -224,7 +226,11 @@ describe('Item pricing', function()  {
 });
 ```
 
-You may notice that the test cases line up to the unit test cases. This is intentional, as the integration tests are designed to ensure that the plugin logic works correctly in the real system, the same as it does when the data is mocked/stubbed.
+You may notice that most of the test cases line up to the unit test cases. This is intentional, as the integration tests are designed to ensure that the plugin logic works correctly in the real system, the same as it does when the data is mocked/stubbed.
+
+:::info
+The complete site code for the custom pricing case study, including test files, is available on [GitHub](https://github.com/doubleedesign/demo-dance).
+:::
 
 
 ## Useful links
