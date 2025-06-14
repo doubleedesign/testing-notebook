@@ -70,6 +70,7 @@ You will often use these tools in conjunction with libraries for [mocking/stubbi
 **For PHP:**
 - [Mockery](http://docs.mockery.io/en/stable/)
 - [Patchwork](https://github.com/antecedent/patchwork)
+- [Spies](https://github.com/sirbrillig/spies)
 - [BrainMonkey](https://github.com/Brain-WP/BrainMonkey) (WordPress-specific)
 - [WP_Mock](https://github.com/10up/wp_mock) (WordPress-specific)
 

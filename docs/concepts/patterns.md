@@ -83,3 +83,41 @@ This variation of the AAA pattern just adds an extra assertion before the act, t
 #### Multi-step AAA
 
 Sometimes you may need to perform multiple actions in the Act step, or multiple assertions in the Assert step. In this case, you can still use the AAA pattern - you'll just have multiple Act and Assert steps. Generally you should keep these to a minimum - if you have more than 2 or maybe 3 "act" steps, your test might really be multiple tests in disguise. 
+
+#### Arrange, Assert, Act
+
+In some cases such as when using [WP_Mock](https://github.com/10up/wp_mock) to mock WordPress functions, you may need to include the assertion as part of the mock and _then_ call the thing that calls it (the **act**) step. This can feel a little counterintuitive if you're used to the standard AAA pattern, but you could think of it was "expect this to happen" rather than "expect that this happened". For example:
+
+```php
+test('it should register the sale price function on the expected WooCommerce hook', function() {
+    // Set up the expectation before creating the instance that will trigger the hook
+    WP_Mock::expectFilterAdded('woocommerce_product_get_sale_price', [Mockery::anyOf(ItemPricing::class), 'update_sale_price'], 10, 2);
+    
+    // Create the instance so the constructor, which contains the hook registration, is called
+    $instance = new ItemPricing();
+});
+```
+
+```php
+test('it should set the sale price to empty if the member price is cheaper', function() use ($salePrice, $memberPrice, $regPrice) {
+    // Instantiate the class here so it's after the mocks have been set up
+    $instance = new ItemPricing();
+    
+    // Mock the result of current_user_can for the member role
+    MockUtils::mock_user_role_or_cap('member', true);
+
+    // Create a minimal mock of a product and the relevant post meta
+    $product = MockProducts::create(['id' => 123, 'regular_price' => $regPrice]);
+    WP_Mock::userFunction('get_post_meta', [
+        'args' => [123, '_member_price', true],
+        'return' => $memberPrice,
+        'times' => 1 // Assert that get_post_meta will be called once in this case
+    ]);
+
+    // Run the function we're testing
+    $result = $instance->update_sale_price($salePrice, $product);
+
+    // Assert that the result is no sale price
+    expect($result)->toBe("");
+});
+```

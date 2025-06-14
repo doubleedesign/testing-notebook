@@ -14,14 +14,13 @@ Mocking and stubbing is part of the **arrange** step in the [Arrange-Act-Assert 
 ## Terminology
 
 :::note Definitions
-I tend to use the terms "mock" and "mocking" as an umbrella term for all types of test doubles, and you may see "mocking and stubbing" used as a general term in other testing guides as well as other terms like "monkey patching" and "spies" There are some subtle differences in the technical definitions of these terms:
+I tend to use the terms "mock" and "mocking" as an umbrella term for all types of test doubles, and you may see "mocking and stubbing" used as a general term in other testing guides as well as other terms like "monkey patching" and "spies". There are some subtle differences in the technical definitions of these terms:
 
 - **Stubs**: Replacements used to provide predefined responses to function/method calls.
 - **Mocks**: More sophisticated test doubles that can also verify interactions, such as how many times a function/method was called and the arguments used.
 - **Spies**: A type of mock that records information about how a function/method was called, but does not redefine any behavior of the function/method.
 - **Monkey patching**: A type of stubbing that replaces the function/method at runtime.
 - **Dependency injection**: A technique where dependencies are passed into a function or class, allowing you to replace them with some kind of test double.
-
 :::
 
 :::important
