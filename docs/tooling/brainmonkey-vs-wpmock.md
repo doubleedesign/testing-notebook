@@ -51,7 +51,7 @@ afterEach(function () {
 });
 ```
 
-Conversely, WP_Mock has its own `TestCase` class which extends the PHPUnit one, which the docs instruct us to extend. This could be a problem for Pest users because it means that anything contained in that class will not work out of the box. Whether this matters will depend on which features you use, and it's not necessarily a deal-breaker - it just means you may need to do some additional setup. 
+Conversely, WP_Mock has its own `TestCase` class which extends the PHPUnit one, which the docs instruct us to extend. This could be a problem for Pest users because it means that anything contained in that class will not work out of the box. Whether this matters will depend on which features you use, and it's not necessarily a deal-breaker - it just means you may need to do some additional setup (I have not found this to be an issue in anything I've used it for so far though).
 
 Basic setup of WP_Mock in a Pest test can be done like this:
 
@@ -73,7 +73,7 @@ At the time of writing, they seem pretty much the same to me so far. When I find
 
 ## Some simple scenarios
 
-_So far_, I have not found much difference between these two libraries in practice, other than syntax. If you find the same, which you find easier to read and write might be the deciding factor.
+For basic stubbing, I have not found much difference between these two libraries in practice, other than syntax. If you find the same, which you find easier to read and write might be the deciding factor.
 
 Shown below are some examples of how to do some simple, common mocking/stubbing tasks with each library.
 
@@ -130,3 +130,115 @@ when('current_user_can')->alias(function($role_or_capability) {
 });
 ```
 :::
+
+## Assertions about function calls
+
+You may have cases where you want to assert that a function gets called, how many times, with what arguments, etc. 
+
+In WP_Mock, the most concise way you can do this within your mock function setup, _before_ you call the function that will trigger it.
+
+The below example shows how you end up arranging and asserting in one step for each function you want to mock and check, before you do any action (in this case, calling the `update_sale_price` method).
+
+```php
+use WP_Mock;
+
+test('it should set the sale price to empty if the member price is cheaper', function() use ($salePrice, $memberPrice, $regPrice) {
+    // Arrange: 
+    // Instantiate the class we're testing and create a minimal product mock
+    $instance = new ItemPricing();
+    $product = MockProducts::create(['id' => 123, 'regular_price' => $regPrice, 'sale_price' => $salePrice]);
+    
+    // Mock that the user is a member (Arrange the user role)
+    WP_Mock::userFunction('current_user_can', [
+        'args' => ['member'],
+        'return' => false
+    ]);
+    
+    WP_Mock::userFunction('get_post_meta', [
+        'args' => [123, '_member_price', true],
+        'return' => $memberPrice,
+        'times' => 1 // Assert that get_post_meta() will be called once in this case
+    ]);
+
+    // Act: Run the function we're testing
+    $result = $instance->update_sale_price($salePrice, $product);
+    
+    // Assert that the result is no sale price
+    expect($result)->toBe("");
+});
+```
+
+This can feel a bit counterintuitive if you're used to the standard [AAA pattern](../concepts/patterns.md), because you're asserting before you act. An alternative is to _alias_ the function to a Mockery spy. (Remember, both WP_Mock and BrainMonkey use Mockery under the hood, so while this is more verbose it doesn't bring in another dependency.)
+
+```php
+test('it should set the sale price to empty if the member price is cheaper', function() use ($salePrice, $memberPrice, $regPrice) {
+    // Arrange: 
+    // Instantiate the class we're testing and create a minimal product mock
+    $instance = new ItemPricing();
+    $product = MockProducts::create(['id' => 123, 'regular_price' => $regPrice, 'sale_price' => $salePrice]);
+    
+    // Mock that the user is a member (Arrange the user role)
+    WP_Mock::userFunction('current_user_can', [
+        'args' => ['member'],
+        'return' => true
+    ]);
+    
+    // Use a spy function to mock get_post_meta in a way we can assert on later
+    $postmetaSpy = Mockery::spy(function($key) use ($memberPrice) {
+        if($key === '_member_price') {
+            return $memberPrice;
+        }
+        return null;
+    });
+    WP_Mock::alias('get_post_meta', $postmetaSpy);
+
+    // Act: Run the function we're testing
+    $result = $instance->update_sale_price($salePrice, $product);
+    
+    // Assert that the member price was fetched
+    $postmetaSpy->shouldHaveReceived('get_post_meta', [Mockery::any(), '_member_price', Mockery::any()]);
+
+    // Assert that the result is no sale price
+    expect($result)->toBe("");
+});
+```
+
+The BrainMonkey equivalent of this is:
+
+```php
+use Brain\Monkey\Functions\{when,stubs};
+
+test('it should set the sale price to empty if the member price is cheaper', function() use ($salePrice, $memberPrice, $regPrice) {
+    // Arrange: 
+    // Instantiate the class we're testing and create a minimal product mock
+    $instance = new ItemPricing();
+    $product = MockProducts::create(['id' => 123, 'regular_price' => $regPrice, 'sale_price' => $salePrice]);
+    
+    // Mock that the user is a member (Arrange the user role)
+    when('current_user_can')->alias(function($role_or_capability) {
+        return $role_or_capability === 'member';
+    });
+    
+    // Use a spy function to mock get_post_meta in a way we can assert on later
+    $postmetaSpy = Mockery::spy(function($post_id, $key, $single) use ($memberPrice) {
+        if ($key === '_member_price') {
+            return $memberPrice;
+        }
+        return null;
+    });
+    when('get_post_meta')->alias($postmetaSpy);
+
+    // Act: Run the function we're testing
+    $result = $instance->update_sale_price($salePrice, $product);
+    
+    // Assert that the member price was not fetched
+   	$postmetaSpy->shouldNotHaveReceived('get_post_meta', [Mockery::any(), '_member_price', Mockery::any()]);
+    
+    // Assert that the sale price has not changed
+	expect($result)->toBe($salePrice);
+});
+```
+
+## Conclusion
+
+Just as I think I've found an important difference, it turns out no, you can just as easily do that thing with the other library - at least for my use cases so far. Personally, I slightly prefer BrainMonkey's syntax, and that it can be used outside WordPress is another point in its favour. But for WordPress use, there's no clear winner - they're pretty much the same thing and it's reasonably straightforward to translate between the two once you get a hang of using them.
