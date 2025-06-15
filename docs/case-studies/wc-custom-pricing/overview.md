@@ -194,9 +194,9 @@ The below table summarises the functionality coverage and findings from testing 
     <tbody>
         <tr>
             <th scope="row">Speed</th>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>✅ 78ms for 23 test cases</td>
+            <td>⚠️ 5 seconds for 12 test cases</td>
+            <td>⛔ 56 seconds for 10 test cases</td>
         </tr>
         <tr>
             <th scope="row">Key tools used</th>
@@ -214,7 +214,11 @@ The below table summarises the functionality coverage and findings from testing 
                     <li>Guzzle (HTTP client)</li>
                 </ul>
             </td>
-            <td></td>
+            <td>
+                <ul>
+                    <li>Playwright</li>
+                </ul>
+            </td>
         </tr>
         <tr>
             <th scope="row" rowspan="2">Setup</th>
