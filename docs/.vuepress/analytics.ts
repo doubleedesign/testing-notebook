@@ -6,10 +6,10 @@ export const analytics = {
 		};
 
 		if(window.location.hostname === 'localhost') {
-			console.debug('Analytics event:', label, props);
+			console.debug('Analytics event:', label, { props });
 		}
 
 		// @ts-expect-error Vue: Property plausible does not exist on type Window & typeof globalThis
-		window.plausible(label, props);
+		window.plausible(label, { props });
 	}
 };
