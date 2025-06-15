@@ -2,10 +2,9 @@
 title: "Part 2: Integration testing with the WP REST API"
 heading: "Using the WP REST API to integration test a plugin"
 order: 2
-status: drafting
 source_lang: [PHP]
 test_type: [Integration]
-test_tools: [Pest, Jest]
+test_tools: [Pest]
 sidebarDepth: 0
 ---
 
