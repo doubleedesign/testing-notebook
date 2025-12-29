@@ -35,7 +35,7 @@ WP_Mock is designed for PHPUnit, and BrainMonkey is framework-agnostic and provi
 - [BrainMonkey - Setup for WordPress testing](https://giuseppe-mazzapica.gitbook.io/brain-monkey/wordpress-specific-tools/wordpress-setup)
 - [WP_Mock - Getting Started - Configuration](https://wp-mock.gitbook.io/documentation/getting-started/configuration)
 
-If you are using Pest, you won't have test classes that you can extend. This is not a problem for BrainMonkey, because it just means you put the setup and teardown code in the Pest `beforeEach` and `afterEach` hooks instead of class method overrides: 
+If you are using Pest, you can put the setup and teardown code in the Pest `beforeEach` and `afterEach` hooks instead of class method overrides: 
 
 ```php
 use Brain\Monkey;
@@ -51,7 +51,33 @@ afterEach(function () {
 });
 ```
 
-Conversely, WP_Mock has its own `TestCase` class which extends the PHPUnit one, which the docs instruct us to extend. This could be a problem for Pest users because it means that anything contained in that class will not work out of the box. Whether this matters will depend on which features you use, and it's not necessarily a deal-breaker - it just means you may need to do some additional setup (I have not found this to be an issue in anything I've used it for so far though).
+Or if you are extending another test class like this:
+```php
+// In Pest.php
+pest()->extend(Tests\TestCase::class)->in('Unit');
+```
+
+```php
+// in tests/TestCase.php
+<?php
+namespace Tests;
+use Brain\Monkey;
+use PHPUnit\Framework\TestCase as BaseTestCase; // or another framework's base test case
+
+abstract class TestCase extends BaseTestCase {
+    protected function setUp(): void {
+        parent::setUp();
+        Monkey\setUp();
+    }
+
+    protected function tearDown(): void {
+        parent::tearDown();
+        Monkey\tearDown();
+    }
+}
+```
+
+WP_Mock has its own `TestCase` class which extends the PHPUnit one, which the docs instruct us to extend. This could be a problem for Pest users because it means that anything contained in that class will not work out of the box. Whether this matters will depend on which features you use, and it's not necessarily a deal-breaker - it just means you may need to do some additional setup (I have not found this to be an issue in anything I've used it for so far though).
 
 Basic setup of WP_Mock in a Pest test can be done like this:
 
